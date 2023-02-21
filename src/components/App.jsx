@@ -1,8 +1,11 @@
+
 import AuthForm from './AuthForm/AuthForm';
+import Layout from './Layout/Layout';
 
 export const App = () => {
   return (
     <AuthForm />
+    <Layout />
     // <div
     //   style={{
     //     height: '100vh',
@@ -16,4 +19,4 @@ export const App = () => {
     //   React homework template
     // </div>
   );
-};
+

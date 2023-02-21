@@ -1,0 +1,215 @@
+.container {
+  border: 1px solid red;
+  background: #f5f6fb;
+}
+button{
+    background-color: transparent;
+    border:none;
+    outline: none;
+    cursor: pointer;
+}
+@media screen and (max-width: 767.9px) {
+  .container {
+    margin: 0 auto;
+    max-width: 767px;
+    padding: 16px 20px;
+    padding-bottom: 32px;
+  }
+  .reversing {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .balanceDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 32px; */
+  }
+  .balanceTitle {
+    margin-bottom: 10px;
+  }
+  .totalBalanceConfirmDiv{
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+
+  .reversing {
+    min-width: 436px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .balanceDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .balanceTitle {
+    margin-right: 20px;
+  }
+  .dateDiv {
+    margin-left: auto;
+  }
+  .backDiv {
+    margin-right: 135px;
+  }
+  .balanceDiv {
+    margin-right: auto;
+    margin-right: 90px;
+  }
+  .totalBalanceConfirmDiv{
+    margin-left: 16px;
+  }
+  .titleDiv{}
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 123px;
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+  .backDiv {
+    margin-right: 250px;
+  }
+  .balanceDiv {
+    margin-right: 214px;
+  }
+}
+.titleDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.currentTitle {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: rgba(82, 85, 95, 0.7);
+  margin-bottom: 5px;
+}
+.dateDiv {
+  display: flex;
+}
+.rightArrow {
+  margin-top: 3px;
+  margin-left: 10px;
+}
+.leftArrow {
+  margin-top: 3px;
+  margin-right: 10px;
+}
+.date {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.balanceTitle {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+
+  color: rgba(82, 85, 95, 0.7);
+}
+.totalBalanceSum {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+  text-align: center;
+  margin: 0,auto;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 40px;
+  background-color: transparent;
+}
+.totalBalanceSumDiv {
+  width: 134px;
+  height: 44px;
+  border: 2px solid #ffffff;
+  border-radius: 22px;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.totalBalanceConfirmDiv{
+    width: 134px;
+  height: 44px;
+  border: 2px solid #ffffff;
+  border-radius: 22px;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+.totalBalanceConfirm{
+    font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767.9px) {
+  .arrowDesc {
+    display: none;
+  }
+  .balanceDiv {
+    margin-top: 32px;
+  }
+}
+.backDiv {
+  display: flex;
+  align-items: center;
+}
+.arrowDesc {
+  margin-left: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  letter-spacing: 0.04em;
+
+  color: rgba(82, 85, 95, 0.7);
+}

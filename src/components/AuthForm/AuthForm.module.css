@@ -1,6 +1,6 @@
-.container {
+/* .container {
     background-color: #a07676;
-}
+} */
 
 .form {
     margin: 0 auto;
@@ -64,6 +64,7 @@
     font-size: 14px;
     line-height: 1.14;
     letter-spacing: 0.02em;
+    text-decoration: none;
     cursor: pointer;
     color: #000000;
     background-color: #f6f7fb;

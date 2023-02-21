@@ -72,7 +72,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div className={css.container}>
+    <>
       <div className={css.form}>
         <p className={css.formTextGoogle}>
           You can log in with your Google Account:
@@ -148,7 +148,7 @@ const AuthForm = () => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

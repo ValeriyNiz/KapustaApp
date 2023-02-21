@@ -11,8 +11,8 @@ export const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  
-  extraReducers: {
+
+  reducers: {
     [logIn.pending]: state => {
       state.isLogin = false;
     },

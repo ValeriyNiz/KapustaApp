@@ -1,69 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refresh } from './auth-operations';
+import { logIn, logOut, refresh } from './auth-operations';
 
 export const initialState = {
-  user: { email: null, password: null },
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-  isLoading: false,
-  error: null,
+  accessToken: null,
+  refreshToken: null,
+  sid: null,
+  isLogin: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-
+  
   extraReducers: {
-    [register.pending](state) {
-      state.isLoading = true;
-      state.error = null;
+    [logIn.pending]: state => {
+      state.isLogin = false;
     },
-    [register.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+    [logIn.fulfilled]: (state, { payload }) => {
+      state.accessToken = payload.accessToken;
+      state.refreshToken = payload.refreshToken;
+      state.sid = payload.sid;
+      state.isLogin = true;
     },
-    [register.rejected](state, action) {
-      state.error = action.payload;
-      state.isLoading = false;
+    [logIn.rejected]: state => {
+      state.isLogin = false;
     },
-    [logIn.pending](state) {
-      state.isLoading = true;
-      state.error = null;
+
+    [logOut.fulfilled]: state => {
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.sid = null;
+      state.isLogin = false;
     },
-    [logIn.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+    [refresh.pending]: state => {
+      state.isLogin = false;
     },
-    [logIn.rejected](state, action) {
-      state.error = action.payload;
-      state.isLoading = false;
+    [refresh.fulfilled]: (state, { payload }) => {
+      state.accessToken = payload.newAccessToken;
+      state.refreshToken = payload.newRefreshToken;
+      state.sid = payload.newSid;
+      state.isLogin = true;
     },
-    [logOut.pending](state) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [logOut.fulfilled](state) {
-      state.user = { email: null, password: null };
-      state.token = null;
-      state.isLoggedIn = false;
-    },
-    [logOut.rejected](state, action) {
-      state.error = action.payload;
-      state.isLoading = false;
-    },
-    [refresh.pending](state) {
-      state.isRefreshing = true;
-    },
-    [refresh.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      state.isRefreshing = false;
-    },
-    [refresh.rejected](state) {
-      state.isRefreshing = false;
+    [refresh.rejected]: state => {
+      state.isLogin = false;
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.sid = null;
     },
   },
 });

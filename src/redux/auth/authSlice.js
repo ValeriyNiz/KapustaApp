@@ -26,27 +26,29 @@ const authSlice = createSlice({
       state.isLogin = false;
     },
 
-    [logOut.fulfilled]: state => {
-      state.accessToken = null;
-      state.refreshToken = null;
-      state.sid = null;
-      state.isLogin = false;
-    },
-    [refresh.pending]: state => {
-      state.isLogin = false;
-    },
-    [refresh.fulfilled]: (state, { payload }) => {
+    [logOut.fulfilled]: state => ({
+      ...state,
+      accessToken: null,
+      refreshToken: null,
+      sid: null,
+      isLogin: false,
+    }),
+    [refresh.pending]: state => ({ ...state, isLogin: false }),
+    
+    [refresh.fulfilled]: (state, { payload }) => ({
+      ...state,
       state.accessToken = payload.newAccessToken;
       state.refreshToken = payload.newRefreshToken;
       state.sid = payload.newSid;
       state.isLogin = true;
-    },
-    [refresh.rejected]: state => {
+    }),
+    [refresh.rejected]: state => ({
+      ...state,
       state.isLogin = false;
       state.accessToken = null;
       state.refreshToken = null;
       state.sid = null;
-    },
+    }),
   },
 });
 

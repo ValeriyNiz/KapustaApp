@@ -37,17 +37,17 @@ const authSlice = createSlice({
     
     [refresh.fulfilled]: (state, { payload }) => ({
       ...state,
-      state.accessToken = payload.newAccessToken;
-      state.refreshToken = payload.newRefreshToken;
-      state.sid = payload.newSid;
-      state.isLogin = true;
+      accessToken = payload.newAccessToken;
+      refreshToken = payload.newRefreshToken;
+      sid = payload.newSid;
+      isLogin = true;
     }),
     [refresh.rejected]: state => ({
       ...state,
-      state.isLogin = false;
-      state.accessToken = null;
-      state.refreshToken = null;
-      state.sid = null;
+      isLogin = false;
+      accessToken = null;
+      refreshToken = null;
+      sid = null;
     }),
   },
 });

@@ -8,6 +8,7 @@
 
 .balance__wrapper_secondary {
   display: flex;
+  position: relative;
 }
 
 .balance__button {
@@ -29,6 +30,12 @@
 .balance__button:hover,
 .balance__button:focus {
   background-color: #ffffff;
+}
+
+.balance__button:disabled {
+  background-color: #52555f10;
+  border-color: #52555f25;
+  color:#52555f25
 }
 
 @media screen and (min-width: 768px) {

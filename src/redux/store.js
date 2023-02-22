@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/authSlice';
+import { reportReducer } from './report/report-slice';
 
 const persistConfig = {
   key: 'auth',
@@ -22,6 +23,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    report:reportReducer
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware =>

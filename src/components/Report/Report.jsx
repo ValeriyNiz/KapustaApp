@@ -59,7 +59,7 @@ export const Report = () => {
       expensesCategoriesSorted = [...expensesCategories].sort(
         (first, second) => first.sum - second.sum
       );
-    }``
+    }
   }
 
   const onStatusChange = () => {

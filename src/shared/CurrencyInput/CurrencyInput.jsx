@@ -34,7 +34,7 @@ export default function CurrencyInput({ maskOptions, ...inputProps }) {
 }
 
 CurrencyInput.defaultProps = {
-  // inputMode: 'numeric',
+  inputMode: 'numeric',
   maskOptions: {},
 };
 

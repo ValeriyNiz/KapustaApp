@@ -1,0 +1,21 @@
+.tooltip__box {
+  background: linear-gradient(117.84deg, #1d346a 2.84%, #031634 67.28%);
+  padding: 30px 25px;
+  color: #ffffff;
+  width: 280px;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  position: absolute;
+  top: 58px;
+}
+
+.tooltip__arrow {
+  position: absolute;
+  left: 65px;
+  top: -29px;
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent #142a58 transparent;
+}

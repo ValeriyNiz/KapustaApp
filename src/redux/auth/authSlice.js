@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, logOut, refresh } from './auth-operations';
+import { logIn, logOut, refresh, googleAuth } from './auth-operations';
 
 export const initialState = {
+  user: {
+    email: '',
+  },
   accessToken: null,
   refreshToken: null,
   sid: null,
@@ -34,7 +37,7 @@ const authSlice = createSlice({
       isLogin: false,
     }),
     [refresh.pending]: state => ({ ...state, isLogin: false }),
-    
+
     [refresh.fulfilled]: (state, { payload }) => ({
       ...state,
       accessToken: payload.newAccessToken,
@@ -49,7 +52,15 @@ const authSlice = createSlice({
       refreshToken: null,
       sid: null,
     }),
+    [googleAuth.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.sid = action.payload.sid;
+      state.isLogin = true;
+    },
   },
 });
+
 
 export const authReducer = authSlice.reducer;

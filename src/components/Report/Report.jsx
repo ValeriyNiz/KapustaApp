@@ -1,6 +1,7 @@
-import css from './Report.module.css';
-import Sprite from '../../images/currentPeriod.svg';
-import { chooseIcon } from './chooseIcon';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+
+import { fetchFullStatistics } from 'redux/report/report-operations';
 import {
   getTotalReportObject,
   getSearchedMonth,
@@ -8,12 +9,11 @@ import {
   getDifference,
 } from 'redux/report/report-selectors';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchFullStatistics } from 'redux/report/report-operations';
-import { useState } from 'react';
-import { useEffect } from 'react';
-export const Report = () => {
-  const monthNames = [
+import css from './Report.module.css';
+import Sprite from '../../images/currentPeriod.svg';
+import { chooseIcon } from './chooseIcon';
+
+const monthNames = [
     'January',
     'February',
     'March',
@@ -27,6 +27,9 @@ export const Report = () => {
     'November',
     'December',
   ];
+
+export const Report = () => {
+  
   const dispatch = useDispatch();
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
@@ -43,39 +46,33 @@ export const Report = () => {
       })
     );
   }, [searchedMonth, searchedYear, dispatch]);
-  if (totalReportObject) {
-    const income = totalReportObject.income;
-    const expenses = totalReportObject.expenses;
-
-    const incomeCategories = income.categories;
-    const expensesCategories = expenses.categories;
-
-    if (incomeCategories !== undefined) {
-      incomCategoriesSorted = [...incomeCategories].sort(
-        (first, second) => first.sum - second.sum
-      );
-    }
-    if (expensesCategories !== undefined) {
-      expensesCategoriesSorted = [...expensesCategories].sort(
-        (first, second) => first.sum - second.sum
-      );
-    }
-  }
-
-  const onStatusChange = () => {
-    if (activeStatus === 'Expenses') {
-      setActiveStatus('Income');
-    } else {
-      setActiveStatus('Expenses');
-    }
-  };
+  
   useEffect(() => {
-    if (activeStatus === 'Expenses') {
-      setCategoriesArray(expensesCategoriesSorted);
-    } else {
-      setCategoriesArray(incomCategoriesSorted);
+    if (totalReportObject) {
+      const { income, expenses } = totalReportObject;
+      let incomCategoriesSorted = null;
+      let expensesCategoriesSorted = null;
+
+      if (income && income.categories) {
+        incomCategoriesSorted = [...income.categories].sort(
+          (first, second) => first.sum - second.sum
+        );
+      }
+      if (expenses && expenses.categories) {
+        expensesCategoriesSorted = [...expenses.categories].sort(
+          (first, second) => first.sum - second.sum
+        );
+      }
+      setCategoriesArray(activeStatus === 'Expenses'
+        ? expensesCategoriesSorted
+        : incomCategoriesSorted);
     }
   }, [activeStatus, totalReportObject]);
+
+  const onStatusChange = () => {
+    setActiveStatus(activeStatus === 'Expenses' ? 'Income' : 'Expenses');
+  }
+  
   return (
     <div className={css.container}>
       <div className={css.wrapper}>

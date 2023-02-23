@@ -1,5 +1,5 @@
 import css from './Header.module.css';
-import Sprite from '../../images/sprite.svg';
+import Sprite from '../../images/cabagge/sprite.svg';
 import UserMenu from '../UserMenu/UserMenu';
 import { getIsLoggedIn } from 'redux/auth/auth-selector';
 

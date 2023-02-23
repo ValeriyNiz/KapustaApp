@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: '',
+  baseURL: 'https://kapusta-dvde.onrender.com/api-docs/',
 });
 
 const authToken = {

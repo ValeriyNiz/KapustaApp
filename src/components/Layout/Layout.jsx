@@ -1,13 +1,17 @@
-import { Header } from 'components/Header/Header';
+import { Header } from '../Header/Header';
 import { Outlet } from 'react-router';
+
 import { CurrentPeriod } from 'components/CurrentPeriod/CurrentPeriod';
+import { ExpensesIncomes } from 'components/ExpensesIncomes/ExpensesIncomes';
 
 const Layout = () => {
   return (
     <>
       <Header />
       <Outlet />
-      <CurrentPeriod/>
+      <ExpensesIncomes>
+        <CurrentPeriod />
+      </ExpensesIncomes>
     </>
   );
 };

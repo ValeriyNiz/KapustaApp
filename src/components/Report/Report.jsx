@@ -6,7 +6,7 @@ import {
   getTotalReportObject,
   getSearchedMonth,
   getSearchedYear,
-  getDifference,
+//   getDifference,
 } from 'redux/report/report-selectors';
 
 import css from './Report.module.css';
@@ -36,8 +36,8 @@ export const Report = () => {
   const totalReportObject = useSelector(getTotalReportObject);
   const [activeStatus, setActiveStatus] = useState('Income');
   const [categoriesArray, setCategoriesArray] = useState();
-  let incomCategoriesSorted;
-  let expensesCategoriesSorted;
+//   let incomCategoriesSorted;
+//   let expensesCategoriesSorted;
   useEffect(() => {
     dispatch(
       fetchFullStatistics({

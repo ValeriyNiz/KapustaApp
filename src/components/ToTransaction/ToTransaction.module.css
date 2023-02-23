@@ -1,0 +1,16 @@
+.transaction {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  margin-left: 6px;
+}
+
+.linkFlex {
+  display: flex;
+  align-items: center;
+  margin-left: 22px;
+}

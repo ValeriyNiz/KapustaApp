@@ -1,0 +1,119 @@
+.containerSVG {
+  padding-left: 23px;
+  padding-bottom: 22px;
+  background-color: #f5f6fb;
+}
+
+.containerBG {
+  padding: 0 20px;
+  border-bottom-left-radius: 120px;
+  background-color: #f5f6fb;
+  text-align: center;
+}
+
+.containerDrop {
+  display: flex;
+  justify-content: center;
+}
+
+.inputName {
+  width: 280px;
+  border: 2px solid #ffffff;
+  border-top-left-radius: 15px;
+  height: 44px;
+  padding-left: 20px;
+  background-color: #f5f6fb;
+  color: #c7ccdc;
+}
+
+.inputName::placeholder {
+  opacity: 100%;
+  font-family: 'Roboto';
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.02em;
+
+  color: #c7ccdc;
+}
+
+.price {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding-left: 18px;
+  padding-right: 18px;
+  border: 2px solid #ffffff;
+  width: 125px;
+  height: 44px;
+  border-bottom-left-radius: 22px;
+  border-top-left-radius: 22px;
+  color: black;
+  background-color: #f5f6fb;
+}
+
+.price::placeholder {
+  opacity: 100%;
+}
+
+.priceContainer {
+  display: flex;
+  margin-top: 32px;
+  padding-bottom: 40px;
+  justify-content: center;
+  border-bottom-left-radius: 120px;
+}
+
+.calcContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  width: 60px;
+  border: 2px solid #ffffff;
+  border-left: 0;
+  border-bottom-right-radius: 22px;
+  border-top-right-radius: 22px;
+  background-color: #f5f6fb;
+}
+
+.buttonsDiv {
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.button {
+  width: 130px;
+  height: 44px;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 1px 2px 5px rgba(170, 178, 197, 0.4);
+  border-radius: 16px;
+  border: 0;
+}
+
+.button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.submit {
+  color: #ffffff;
+  background-color: #ff751d;
+}
+
+.clear {
+  color: #52555f;
+  background-color: #f5f6fb;
+}

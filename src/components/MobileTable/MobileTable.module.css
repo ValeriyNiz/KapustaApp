@@ -1,0 +1,67 @@
+.bin {
+  transition: fill 250ms ease-in-out;
+}
+
+.bin:hover {
+  fill: #e7192e;
+}
+
+.name {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+
+  color: #52555f;
+}
+
+.info {
+  font-family: 'Roboto';
+  font-size: 8px;
+  line-height: 1.13;
+  letter-spacing: 0.04em;
+
+  color: #52555f;
+}
+
+.info:not(:last-child) {
+  margin-right: 20px;
+}
+
+.infoDiv {
+  display: flex;
+}
+
+.elementDiv {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+  border-bottom: 1px solid #f5f6fb;
+}
+
+.value {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  margin-right: 20px;
+  margin-left: auto;
+
+  color: #e7192e;
+}
+
+.value.income {
+  color: #407946;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}

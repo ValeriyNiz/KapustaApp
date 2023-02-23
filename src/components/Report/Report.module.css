@@ -1,0 +1,142 @@
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  width: 280px;
+  margin: 0 auto;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.header {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: #000000;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+@media screen and (max-width: 767.9px) {
+    .container {
+      margin: 0 auto;
+      max-width: 767px;
+      padding: 0 20px;
+    }
+   .list{
+    background-image: repeating-linear-gradient(
+    to top,
+    #000,
+    #000 1px,
+    transparent 1px,
+    transparent 135px
+  );
+  gap:40px 13px;
+   }
+  }
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20 42px;
+  }
+  .wrapper {
+    width: 704px;
+    padding: 20px 40px;
+  }
+  .list{
+    gap:40px 32px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 123px;
+  }
+  .wrapper {
+    padding: 20px 198px;
+    width: 1034px;
+  }
+  .list{
+    gap:40px 20px;
+  }
+
+}
+.sum {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: #52555f;
+}
+.item:hover .icon{
+  fill: #ff751d;
+}
+.category {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: #52555f;
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  /* gap: 25px; */
+}
+.item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 102px;
+}
+.sum {
+  margin-bottom: 5px;
+}
+.con {
+  margin-bottom: 5px;
+}
+.backGround{
+  background: #F5F6FB;
+border-radius: 20px;
+width: 59px;
+height: 60px;
+}
+.item:hover .backGround{
+    background-color: #FFDAC0;;
+}
+.empty{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 50px;
+ text-decoration:underline;
+}

@@ -16,15 +16,13 @@ const reportSlice = createSlice({
     setSearchedYear: (state, action) => {
       state.searchedYear = action.payload;
     },
-  },
-  extraReducers: {
     // [fetchFullStatistics.pending](state, action) {},
     [fetchFullStatistics.fulfilled](state, action) {
       state.totalReportObject = action.payload.data;
     },
     // [fetchFullStatistics.rejected](state, action) {},
   },
-});
+ });
 export const {
   setSearchedMonth,
   setSearchedYear

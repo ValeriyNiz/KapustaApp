@@ -2,12 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API, authToken } from 'API';
 import { toast } from 'react-toastify';
 
-const register = createAsyncThunk('auth/register', async credentials => {
+const register = createAsyncThunk('auth/register', async (credentials, { rejectWithValue }) => {
   try {
     const { data } = await API.post('auth/register', credentials);
     return data;
   } catch (error) {
     toast.error('Server error, please try again later');
+    return rejectWithValue(error); 
   }
 });
 
@@ -19,8 +20,7 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
   } catch (error) {
     if (error.response.status === 401) {
       toast.error('Server error, please try again later');
-    }
-    if (error.response.status !== 401) {
+    } else {
       toast.error('Wrong email or password, please try again.');
     }
   }
@@ -32,6 +32,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
     authToken.unset();
   } catch (error) {
     toast.error('Server error, please try again later');
+    return false;
   }
 });
 
@@ -45,35 +46,33 @@ const refresh = createAsyncThunk(
       return rejectWithValue('something went wrong');
     }
     try {
-      const { data } = await API.post(
+      const response = await API.post(
         '/auth/refresh',
         { sid: prevSid },
-        {
-          headers: {
-            Authorization: `Bearer ${prevRefresh}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${prevRefresh}` } }
       );
 
-      authToken.set(data.newAccessToken);
-      return data;
+      authToken.set(response.data.newAccessToken);
+
+      return response.data; 
     } catch (error) {
       authToken.unset();
-      if (error.response.status !== 401) {
+
+      if (error.response && error.response.status !== 401) { 
         toast.error('We got an error! Dont worry and try again.');
       }
+
       return rejectWithValue('something went wrong');
-    }
-  }
-);
+    }  
+});
 
 const googleAuth = createAsyncThunk(
   'auth/googleAuth',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await API.post('/auth/google', credentials);
-      authToken.set(data.token);
-      return data;
+      const response = await API.post('/auth/google', credentials);
+      authToken.set(response.data.token);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -3,12 +3,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchFullStatistics = createAsyncThunk(
   'report/fetchFullStatistics',
-  async ({ year, currentMonth }, rejectWithValue) => {
+  async ({ year, currentMonth, userId }, rejectWithValue) => {
     try {
       const data = await API.post('/fullStatistics', {
         year,
         currentMonth,
-        userId: '2',
+        userId,
       });
       console.log('data', data);
       return data;

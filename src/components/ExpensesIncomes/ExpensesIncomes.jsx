@@ -1,6 +1,6 @@
 import { ExpIncNav } from 'components/ExpIncNav/ExpIncNav';
 import { MobileTable } from 'components/MobileTable/MobileTable';
-import { Summary } from 'components/Summary/Summary';
+import { SummaryTable } from 'components/SummaryTable/SummaryTable';
 import { TabletForm } from 'components/TabletForm/TabletForm';
 import { TabletTable } from 'components/TabletTable/TabletTable';
 import { ToTransaction } from 'components/ToTransaction/ToTransaction';
@@ -73,7 +73,7 @@ export const ExpensesIncomes = () => {
               {!isTablet ? (
                 <div className={css.bottomContainer}>
                   <TabletTable data={data} choice={choice} />
-                  <Summary sum={summary} />
+                  <SummaryTable sum={summary} />
                 </div>
               ) : (
                 <div className={css.tableContainer}>
@@ -82,7 +82,7 @@ export const ExpensesIncomes = () => {
               )}
             </div>
           </div>
-          {isTablet && <Summary sum={summary} />}
+          {isTablet && <SummaryTable sum={summary} />}
         </>
       )}
     </>

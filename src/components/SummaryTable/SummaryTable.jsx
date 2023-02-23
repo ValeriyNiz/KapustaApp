@@ -1,6 +1,6 @@
-import css from './Summary.module.css';
+import css from './SummaryTable.module.css';
 
-export const Summary = ({ sum }) => {
+export const SummaryTable = ({ sum }) => {
   return (
     <ul className={css.list}>
       <li className={css.headerDiv}>

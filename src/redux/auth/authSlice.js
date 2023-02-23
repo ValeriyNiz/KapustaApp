@@ -53,10 +53,11 @@ const authSlice = createSlice({
       sid: null,
     }),
     [googleAuth.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
-      state.sid = action.payload.sid;
+      const { user, accessToken, refreshToken, sid } = action.payload;
+      state.user = user;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
+      state.sid = sid;
       state.isLogin = true;
     },
   },

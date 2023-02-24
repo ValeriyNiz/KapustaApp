@@ -1,9 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, logOut, refresh, googleAuth } from './auth-operations';
+import {
+  logIn,
+  logOut,
+  refresh,
+  googleAuth,
+  setBalance,
+} from './auth-operations';
 
 export const initialState = {
   user: {
     email: '',
+    balance: null,
   },
   accessToken: null,
   refreshToken: null,
@@ -20,7 +27,7 @@ const authSlice = createSlice({
       state.isLogin = false;
     },
     [logIn.fulfilled]: (state, { payload }) => {
-      state.accessToken = payload.accessToken;
+      state.accessToken = payload.token;
       state.refreshToken = payload.refreshToken;
       state.sid = payload.sid;
       state.isLogin = true;
@@ -60,8 +67,11 @@ const authSlice = createSlice({
       state.sid = sid;
       state.isLogin = true;
     },
+    [setBalance.fulfilled]: (state, { payload }) => {
+      state.user.balance = payload.newUserBalance;
+      state.isLoading = false;
+    },
   },
 });
-
 
 export const authReducer = authSlice.reducer;

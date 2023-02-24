@@ -5,8 +5,8 @@
 }
 
 .logoIcon {
-  margin-top: 12px;
-  margin-bottom: 13px;
+  margin-top: 11px;
+  margin-bottom: 12px;
 }
 
 .header {
@@ -14,14 +14,12 @@
 }
 
 .headerButton {
-  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  
 }
 
 @media screen and (min-width: 768px) {

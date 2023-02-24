@@ -1,5 +1,5 @@
-/* Для подключения универсального бекграунда нужно указать type=secondary и стили подтянутся.
-Пример в CurrentPeriod:
+/* /* Для подключения универсального бекграунда нужно импортировать import Background from 'components/Background/Background'; и указать<Background type=secondary> ваша вложенность</Background> и стили подтянутся. */
+/* Пример в CurrentPeriod:
 return (
     <Background type="Secondary">
       <Summary />

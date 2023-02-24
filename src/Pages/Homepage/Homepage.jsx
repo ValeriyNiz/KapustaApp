@@ -1,5 +1,5 @@
 import Background from 'components/Background/Background';
-import styles from '../Homepage/HomePage.module.css';
+import styles from '../HomePage/HomePage.module.css';
 import AuthForm from 'components/AuthForm/AuthForm';
 
 const HomePage = () => {

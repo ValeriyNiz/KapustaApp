@@ -9,6 +9,7 @@ const HomePage = () => {
         <div className={styles.title}></div>
         <AuthForm></AuthForm>
       </div>
+      <div></div>
     </Background>
   );
 };

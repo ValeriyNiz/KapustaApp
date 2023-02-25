@@ -1,22 +1,18 @@
-import { Routes, Route } from 'react-router';
-import Layout from './Layout/Layout';
-import HomePage from '../Pages/HomePage/HomePage';
-import { PublicRoute } from './PublicRoute/PublicRoute';
+import { Route, Routes } from 'react-router-dom';
+
+import { ExpensesIncomes } from 'Pages/ExpensesIncomes/ExpensesIncomes';
+import HomePage from 'Pages/HomePage/HomePage';
+import { Header } from './Header/Header';
+import { CurrentPeriod } from './CurrentPeriod/CurrentPeriod';
 
 export const App = () => {
   return (
     <>
+      <Header />
       <Routes>
-        <Route index element={<Layout />}>
-          <Route
-            index
-            element={
-              <PublicRoute>
-                <HomePage />
-              </PublicRoute>
-            }
-          />
-        </Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="expenses" element={<ExpensesIncomes />} />
+        <Route path="expenses/reports" element={<CurrentPeriod />} />
       </Routes>
     </>
   );

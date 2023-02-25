@@ -4,6 +4,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import { getIsLoggedIn } from 'redux/auth/auth-selector';
 
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const isLogin = useSelector(getIsLoggedIn);
@@ -11,11 +12,11 @@ export const Header = () => {
   return (
     <header className={css.header}>
       <div className={css.headerContainer}>
-        <button className={css.headerButton} type="button">
+        <Link className={css.headerButton} to="/">
           <svg className={css.logoIcon} width={90} height={31}>
             <use href={`${Sprite}#icon-logo`}></use>
           </svg>
-        </button>
+        </Link>
         {isLogin && <UserMenu />}
       </div>
     </header>

@@ -10,6 +10,7 @@ import {
   setSearchedMonth,
   setSearchedYear,
 } from '../../redux/report/report-slice';
+import { Link } from 'react-router-dom';
 export const Summary = () => {
   const dispatch = useDispatch();
   const monthNames = [
@@ -60,11 +61,11 @@ export const Summary = () => {
   return (
     <div className={css.container}>
       <div className={css.backDiv}>
-        <button>
+        <Link to="">
           <svg width={18} height={12}>
             <use href={`${Sprite}#icon-arrow-back`}></use>
           </svg>
-        </button>
+        </Link>
         <p className={css.arrowDesc}>Main Page</p>
       </div>
       <div className={css.reversing}>

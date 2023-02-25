@@ -77,7 +77,7 @@ const AuthForm = () => {
         <p className={css.formTextGoogle}>
           You can log in with your Google Account:
         </p>
-        <a href="1" className={css.googleBtn}>
+        <a href="https://google.com" className={css.googleBtn}>
           <GoogleIcon className={css.googleSvg} />
           Google
         </a>

@@ -15,6 +15,7 @@ button {
 .wrapper {
   width: 280px;
   margin: 0 auto;
+  
 }
 
 .titleContainer {
@@ -73,6 +74,7 @@ button {
     width: 1280px;
     margin: 0 auto;
     padding: 0 123px;
+    /* background-color: #407946; */
   }
   .wrapper {
     padding: 20px 198px;
@@ -139,5 +141,30 @@ width: 59px;
 height: 60px;
 }
 .item:hover .backGround{
-    background-color: #FFDAC0;;
+    background-color: #FFDAC0;
+}
+
+/* //__________________ */
+@media screen and (max-width: 767.9px) {
+  .box {
+    width: 1280px;
+    height: 500px;
+    background-color: #F2F5FC;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box {
+    width: 700px;
+    height: 500px;
+    
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .box {
+    width: 700px;
+    height: 500px;
+    background-color: #FFDAC0;
+  }
 }

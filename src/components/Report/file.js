@@ -4,14 +4,38 @@
         categories: [
             {
                 category: "Products",
-                sum: 1200,
+                sum: 3000,
                 descriptions: [
                     {
-                        description: "bed",
-                        sum: 900
+                        description: "Pork",
+                        sum: 5000
                     },
                     {
-                        description: "shirt",
+                        description: "Beef",
+                        sum: 1000
+                    },
+                    {
+                        description: "Chiken",
+                        sum: 1800
+                    },
+                    {
+                        description: "Fish",
+                        sum: 650
+                    },
+                    {
+                        description: "Panini",
+                        sum: 3500
+                    },
+                    {
+                        description: "Coffee",
+                        sum: 800
+                    },
+                    {
+                        description: "Spaghetti",
+                        sum: 2500
+                    },
+                    {
+                        description: "Chocolate",
                         sum: 300
                     }
                 ]
@@ -56,7 +80,7 @@
                     },
                     {
                         description: "wow",
-                        sum: 950
+                        sum: 750
                     }
                 ]
             },

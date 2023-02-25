@@ -1,5 +1,7 @@
+import Background from 'components/Background/Background';
 import { ExpIncNav } from 'components/ExpIncNav/ExpIncNav';
 import { MobileTable } from 'components/MobileTable/MobileTable';
+import ReportsBalanceBlock from 'components/ReportsBalanceBlock/ReportsBalanceBlock';
 import { SummaryTable } from 'components/SummaryTable/SummaryTable';
 import { TabletForm } from 'components/TabletForm/TabletForm';
 import { TabletTable } from 'components/TabletTable/TabletTable';
@@ -59,14 +61,16 @@ export const ExpensesIncomes = () => {
   return (
     <>
       {isMobile ? (
-        <>
+        <Background type="Secondary">
           <ToTransaction />
+          <ReportsBalanceBlock/>
           <MobileTable data={data} choice={choice} />
           <ExpIncNav choice={choice} setChoice={setChoice} />
-        </>
+        </Background>
       ) : (
-        <>
-          <div className={css.container}>
+        <Background type="Secondary">
+            <div className={css.container}>
+              <ReportsBalanceBlock/>
             <ExpIncNav choice={choice} setChoice={setChoice} />
             <div className={css.section}>
               <TabletForm options={options} />
@@ -83,7 +87,7 @@ export const ExpensesIncomes = () => {
             </div>
           </div>
           {isTablet && <SummaryTable sum={summary} />}
-        </>
+        </Background>
       )}
     </>
   );

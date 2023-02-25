@@ -1,29 +1,41 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBalance } from 'redux/auth/auth-operations';
+import { getBalance } from 'redux/auth/auth-selector';
 
 import CurrencyInput from 'shared/CurrencyInput/CurrencyInput';
 import Tooltip from 'shared/Tooltip/Tooltip';
 import css from './Balance.module.css';
 
 export default function Balance() {
-  const [balance, setBalance] = useState(null);
-  const [isSent, setIsSent] = useState(false);
-  console.log(balance);
-  console.log(isSent);
+  const dispatch = useDispatch();
+  const balance = useSelector(getBalance);
+  console.log('balanceRedux', balance);
 
-  const handlerSubmit = (e) => {
+  const [balValue, setBalValue] = useState(null);
+  const [isSent, setIsSent] = useState(false);
+  console.log('balValue ', balValue);
+  // console.log(isSent);
+
+  const handlerSubmit = e => {
     e.preventDefault();
-    
-    if (balance > 0) {
-      alert(`balance: ${balance}`);
-      setIsSent(true)
+    const inputBalance = +e.target.elements.balance.value
+      .split(' ')
+      .join('')
+      .slice(0, -3);
+    console.log(inputBalance);
+
+    if (inputBalance > 0) {
+      dispatch(setBalance({ balance: inputBalance }));
+      setIsSent(true);
     }
 
     return;
   };
 
   const onChange = e => {
-    setBalance(+e.target.value.split(' ').join('').slice(0, -3));
-    setIsSent(false)
+    setBalValue(+e.target.value.split(' ').join('').slice(0, -3));
+    setIsSent(false);
   };
 
   return (
@@ -32,9 +44,16 @@ export default function Balance() {
       <form
         onSubmit={handlerSubmit}
         className={css.balance__wrapper_secondary}
+        autoComplete="off"
       >
-        <CurrencyInput type="text" value={balance} onChange={onChange} placeholder="00.00 UAH"/>
-        {!(balance > 0) && (
+        <CurrencyInput
+          type="text"
+          name="balance"
+          value={balValue}
+          onChange={onChange}
+          placeholder="00.00 UAH"
+        />
+        {!(balValue > 0) && (
           <Tooltip>
             <p>
               Hello! To get started, enter the current balance of your account!
@@ -44,10 +63,10 @@ export default function Balance() {
             </p>
           </Tooltip>
         )}
-         <button
+        <button
           className={css.balance__button}
           type="submit"
-          disabled={!balance || isSent }
+          disabled={!balValue || isSent}
         >
           CONFIRM
         </button>

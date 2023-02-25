@@ -15,7 +15,7 @@ const register = createAsyncThunk('auth/register', async (credentials, { rejectW
 const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await API.post('auth/login', credentials);
-    authToken.set(data.accessToken);
+    authToken.set(data.token);
     return data;
   } catch (error) {
     if (error.response.status === 401) {
@@ -79,5 +79,18 @@ const googleAuth = createAsyncThunk(
   }
 );
 
-export { register, logIn, logOut, refresh, googleAuth };
+const setBalance = createAsyncThunk(
+  'auth/setBalance',
+  async (balance, { rejectWithValue }) => {
+    try {
+      console.log('balance in operations', balance);
+      const { data } = await API.patch('auth/user/balance', balance);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export { register, logIn, logOut, refresh, googleAuth, setBalance };
 

@@ -6,7 +6,7 @@ export const ToTransaction = () => {
   const navigate = useNavigate();
 
   const goToExpensesPage = () => {
-    navigate('MobileProductForm');
+    navigate('mobile-product-form');
   };
 
   return (

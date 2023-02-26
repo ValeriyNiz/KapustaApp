@@ -66,17 +66,18 @@ return (
     background-size: 100% 526px, auto;
     background-position: 0 0, bottom 20px left 50%;
     background-repeat: no-repeat, repeat-x;
-    /* animation: kapusta-bottom-desctop-secondary 20s linear infinite; */
+    animation: kapusta-bottom-desctop-secondary 30s linear infinite;
   }
 
   .mainBgPrimary {
     background-image: url(../../images/cabagge/kapusta_small.png),
       url(../../images/cabagge/kapusta_main.png),
       url(../../images/cabagge/rectangle.png);
+    animation: kapusta-main-desktop 30s linear infinite;
   }
 }
 
-/* @keyframes kapusta-bottom-desctop-secondary {
+@keyframes kapusta-bottom-desctop-secondary {
   0% {
     background-position: 0 0, bottom 20px left 50%;
   }
@@ -86,4 +87,19 @@ return (
   100% {
     background-position: 0 0, bottom 20px left 50%;
   }
-} */
+}
+
+@keyframes kapusta-main-desktop {
+  0% {
+    background-position: left calc(50% - 311px) bottom 100px, left top 28px,
+      left top;
+  }
+  50% {
+    background-position: left calc(50% - 311px) bottom 100px, left 100% top 28px,
+      left top;
+  }
+  100% {
+    background-position: left calc(50% - 311px) bottom 100px, left top 28px,
+      left top;
+  }
+}

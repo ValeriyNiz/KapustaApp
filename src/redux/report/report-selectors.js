@@ -6,4 +6,4 @@ export const getTotalIncome = state =>
   state.report.totalReportObject.income.totalSum;
 export const getTotalExpenses = state =>
   state.report.totalReportObject.expenses.totalSum;
-export const getBalance = state => state.auth.user.balance;
+

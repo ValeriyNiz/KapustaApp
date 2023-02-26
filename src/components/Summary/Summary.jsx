@@ -10,6 +10,7 @@ import {
   setSearchedMonth,
   setSearchedYear,
 } from '../../redux/report/report-slice';
+import { useNavigate } from "react-router-dom";
 
 import { getBalance } from 'redux/auth/auth-selector';
 
@@ -36,6 +37,12 @@ export const Summary = () => {
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
 
+  const navigate = useNavigate();
+
+  const goToExpensesPage = () => {
+    navigate("/expenses");
+  };
+
   const toNext = () => {
     if (searchedMonth === 'December' && searchedYear !== currentYear) {
       dispatch(setSearchedMonth('January'));
@@ -58,7 +65,7 @@ export const Summary = () => {
   return (
     <div className={css.container}>
       <div className={css.backDiv}>
-        <button className={css.arrowButton}>
+        <button onClick={goToExpensesPage} className={css.arrowButton}>
           <svg width={18} height={12}>
             <use href={`${Sprite}#icon-arrow-back`}></use>
           </svg>

@@ -3,7 +3,7 @@ import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
 
-export const MobileProductForm = ({ options }) => {
+export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
 
   const handleSubmit = evt => {
@@ -14,6 +14,20 @@ export const MobileProductForm = ({ options }) => {
     document.getElementById('productForm').reset();
     setSelectedDropValue(null);
   };
+
+  const options = [
+    { value: 'transport', label: 'Transport' },
+    { value: 'products', label: 'Products' },
+    { value: 'health', label: 'Health' },
+    { value: 'alcohol', label: 'Alcohol' },
+    { value: 'entertainment', label: 'Entertainment' },
+    { value: 'housing', label: 'Housing' },
+    { value: 'technique', label: 'Technique' },
+    { value: 'comm', label: 'Communal, communication' },
+    { value: 'sports', label: 'Sports, hobbies' },
+    { value: 'education', label: 'Education' },
+    { value: 'other', label: 'Other' },
+  ];
 
   return (
     <>

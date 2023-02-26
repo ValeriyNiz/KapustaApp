@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getSearchedMonth,
   getSearchedYear,
-  getBalance,
 } from 'redux/report/report-selectors';
 import {
   setSearchedMonth,
   setSearchedYear,
 } from '../../redux/report/report-slice';
+
+import { getBalance } from 'redux/auth/auth-selector';
 
 export const Summary = () => {
   const dispatch = useDispatch();

@@ -43,6 +43,7 @@ const authSlice = createSlice({
       state.message = '';
     },
     [logIn.fulfilled]: (state, { payload }) => {
+      // localStorage.setItem('auth', JSON.stringify(payload));
       state.accessToken = payload.token;
       state.refreshToken = payload.refreshToken;
       state.sid = payload.sid;

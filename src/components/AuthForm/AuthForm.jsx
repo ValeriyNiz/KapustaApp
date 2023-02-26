@@ -18,12 +18,6 @@ const AuthForm = () => {
   const dispatch = useDispatch();
   const message = useSelector(getMessage);
 
-  const navigate = useNavigate();
-
-  const goToExpensesPage = () => {
-    navigate("/expenses");
-  };
-
   const handleChange = evt => {
     setEmptyInput(false);
 
@@ -73,10 +67,10 @@ const AuthForm = () => {
     if (checkValidData()) {
       return;
     }
-    dispatch(register(credentials))
+    dispatch(register(credentials));
     setIsModalActive(true);
-      // .unwrap()
-      // .then(() => dispatch(logIn(credentials)));
+    // .unwrap()
+    // .then(() => dispatch(logIn(credentials)));
   };
 
   const resetForm = () => {
@@ -86,7 +80,9 @@ const AuthForm = () => {
 
   return (
     <>
-      <ModalSimple active={isModalActive} setActive={setIsModalActive}>{message}</ModalSimple>
+      <ModalSimple active={isModalActive} setActive={setIsModalActive}>
+        {message}
+      </ModalSimple>
       <div className={css.form}>
         <p className={css.formTextGoogle}>
           You can log in with your Google Account:
@@ -153,7 +149,7 @@ const AuthForm = () => {
             </p>
           </label>
           <div className={css.authBtn}>
-            <button onClick={goToExpensesPage} className={css.btn} type="submit">
+            <button onClick={handleLogin} className={css.btn} type="submit">
               Log in
             </button>
             <button className={css.btn} type="button" onClick={handleRegister}>

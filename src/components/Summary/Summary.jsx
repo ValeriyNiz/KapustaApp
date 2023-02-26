@@ -10,7 +10,7 @@ import {
   setSearchedMonth,
   setSearchedYear,
 } from '../../redux/report/report-slice';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import { getBalance } from 'redux/auth/auth-selector';
 
@@ -40,7 +40,7 @@ export const Summary = () => {
   const navigate = useNavigate();
 
   const goToExpensesPage = () => {
-    navigate("/expenses");
+    navigate('/');
   };
 
   const toNext = () => {

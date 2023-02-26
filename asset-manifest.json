@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ValeriyNiz/KapustaApp/static/css/main.05321fd7.css",
-    "main.js": "/ValeriyNiz/KapustaApp/static/js/main.fb83afea.js",
+    "main.js": "/ValeriyNiz/KapustaApp/static/js/main.16bec5ee.js",
     "static/media/currentPeriod.svg": "/ValeriyNiz/KapustaApp/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
     "static/media/kapusta.png": "/ValeriyNiz/KapustaApp/static/media/kapusta.fc652d90e4ffce32f155.png",
     "static/media/kapusta_main.png": "/ValeriyNiz/KapustaApp/static/media/kapusta_main.8d475dd61cb62ca1a1b1.png",
@@ -9,10 +9,10 @@
     "static/media/google.svg": "/ValeriyNiz/KapustaApp/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
     "index.html": "/ValeriyNiz/KapustaApp/index.html",
     "main.05321fd7.css.map": "/ValeriyNiz/KapustaApp/static/css/main.05321fd7.css.map",
-    "main.fb83afea.js.map": "/ValeriyNiz/KapustaApp/static/js/main.fb83afea.js.map"
+    "main.16bec5ee.js.map": "/ValeriyNiz/KapustaApp/static/js/main.16bec5ee.js.map"
   },
   "entrypoints": [
     "static/css/main.05321fd7.css",
-    "static/js/main.fb83afea.js"
+    "static/js/main.16bec5ee.js"
   ]
 }

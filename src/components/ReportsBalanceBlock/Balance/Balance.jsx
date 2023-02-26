@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchBalance,
-  setBalance,
-} from 'redux/auth/auth-operations';
+import { fetchBalance, setBalance } from 'redux/auth/auth-operations';
 import { getBalance } from 'redux/auth/auth-selector';
 
 import CurrencyInput from 'shared/CurrencyInput/CurrencyInput';
@@ -16,8 +13,8 @@ export default function Balance() {
   console.log('balanceRedux', balanceRedux);
 
   useEffect(() => {
-    dispatch(fetchBalance())
-  }, []);
+    dispatch(fetchBalance());
+  }, [dispatch]);
 
   const [inputValue, setinputValue] = useState(0);
   const [isSent, setIsSent] = useState(false);

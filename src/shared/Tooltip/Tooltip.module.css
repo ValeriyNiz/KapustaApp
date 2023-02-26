@@ -9,6 +9,7 @@
   text-align: left;
   position: absolute;
   top: 58px;
+  z-index: 100;
 }
 
 .tooltip__arrow {

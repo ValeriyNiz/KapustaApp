@@ -18,9 +18,9 @@
 }
 
 @media screen and (min-width: 768px) {
-  .currency__input{
+  .currency__input {
     width: 125px;
     border-radius: 16px;
-    padding: 0px 20px;
+    padding: 0px 20px 0px 10px;
   }
 }

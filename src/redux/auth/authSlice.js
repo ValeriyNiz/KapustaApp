@@ -5,6 +5,7 @@ import {
   refresh,
   googleAuth,
   setBalance,
+  register,
 } from './auth-operations';
 
 export const initialState = {
@@ -16,15 +17,30 @@ export const initialState = {
   refreshToken: null,
   sid: null,
   isLogin: false,
+  isLoading: false,
+  // error: null,
+  message: '',
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
 
-  reducers: {
+  extraReducers: {
+    [register.pending]: state => {
+      state.isLoading = true;
+    },
+    [register.fulfilled]: (state, { payload }) => {
+      state.user.email = payload.user;
+      state.message = 'Verify your email, please.';
+    },
+    [register.rejected]: (state, { payload }) => {
+      state.isLogin = false;
+      state.message = payload;
+    },
     [logIn.pending]: state => {
       state.isLogin = false;
+      state.message = '';
     },
     [logIn.fulfilled]: (state, { payload }) => {
       state.accessToken = payload.token;
@@ -32,10 +48,10 @@ const authSlice = createSlice({
       state.sid = payload.sid;
       state.isLogin = true;
     },
-    [logIn.rejected]: state => {
+    [logIn.rejected]: (state, { payload }) => {
       state.isLogin = false;
+      state.message = payload;
     },
-
     [logOut.fulfilled]: state => ({
       ...state,
       accessToken: null,
@@ -44,7 +60,6 @@ const authSlice = createSlice({
       isLogin: false,
     }),
     [refresh.pending]: state => ({ ...state, isLogin: false }),
-
     [refresh.fulfilled]: (state, { payload }) => ({
       ...state,
       accessToken: payload.newAccessToken,

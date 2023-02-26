@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessage } from 'redux/auth/auth-selector';
+import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { ReactComponent as GoogleIcon } from '../../images/google.svg';
 import { logIn, register } from '../../redux/auth/auth-operations';
 import css from './AuthForm.module.css';
@@ -10,7 +12,10 @@ const AuthForm = () => {
   const [emptyInput, setEmptyInput] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [shortLengthPassword, setShortLengthPassword] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
+  
   const dispatch = useDispatch();
+  const message = useSelector(getMessage);
 
   const handleChange = evt => {
     setEmptyInput(false);
@@ -52,8 +57,8 @@ const AuthForm = () => {
       return;
     }
     dispatch(logIn(credentials));
-
     resetForm();
+    setIsModalActive(true);
   };
 
   const handleRegister = () => {
@@ -62,8 +67,9 @@ const AuthForm = () => {
       return;
     }
     dispatch(register(credentials))
-      .unwrap()
-      .then(() => dispatch(logIn(credentials)));
+    setIsModalActive(true);
+      // .unwrap()
+      // .then(() => dispatch(logIn(credentials)));
   };
 
   const resetForm = () => {
@@ -73,6 +79,7 @@ const AuthForm = () => {
 
   return (
     <>
+      <ModalSimple active={isModalActive} setActive={setIsModalActive}>{message}</ModalSimple>
       <div className={css.form}>
         <p className={css.formTextGoogle}>
           You can log in with your Google Account:

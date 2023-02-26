@@ -2,29 +2,36 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API, authToken } from 'API';
 import { toast } from 'react-toastify';
 
-const register = createAsyncThunk('auth/register', async (credentials, { rejectWithValue }) => {
-  try {
-    const { data } = await API.post('auth/register', credentials);
-    return data;
-  } catch (error) {
-    toast.error('Server error, please try again later');
-    return rejectWithValue(error); 
-  }
-});
-
-const logIn = createAsyncThunk('auth/login', async credentials => {
-  try {
-    const { data } = await API.post('auth/login', credentials);
-    authToken.set(data.token);
-    return data;
-  } catch (error) {
-    if (error.response.status === 401) {
-      toast.error('Server error, please try again later');
-    } else {
-      toast.error('Wrong email or password, please try again.');
+const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post('auth/register', credentials);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
-});
+);
+
+const logIn = createAsyncThunk(
+  'auth/login',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post('auth/login', credentials);
+      authToken.set(data.token);
+      console.log('data ', data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+      // if (error.response.status === 401) {
+      //   toast.error('Server error, please try again later');
+      // } else {
+      //   toast.error('Wrong email or password, please try again.');
+      // }
+    }
+  }
+);
 
 const logOut = createAsyncThunk('auth/logout', async () => {
   try {
@@ -54,17 +61,18 @@ const refresh = createAsyncThunk(
 
       authToken.set(response.data.newAccessToken);
 
-      return response.data; 
+      return response.data;
     } catch (error) {
       authToken.unset();
 
-      if (error.response && error.response.status !== 401) { 
+      if (error.response && error.response.status !== 401) {
         toast.error('We got an error! Dont worry and try again.');
       }
 
       return rejectWithValue('something went wrong');
-    }  
-});
+    }
+  }
+);
 
 const googleAuth = createAsyncThunk(
   'auth/googleAuth',
@@ -81,7 +89,10 @@ const googleAuth = createAsyncThunk(
 
 const setBalance = createAsyncThunk(
   'auth/setBalance',
-  async (balance, { rejectWithValue }) => {
+  async (balance, { rejectWithValue, getState }) => {
+    const { accessToken } = getState().auth;
+    console.log('accessToken in setbalance oper', accessToken);
+    authToken.set(accessToken);
     try {
       console.log('balance in operations', balance);
       const { data } = await API.patch('auth/user/balance', balance);
@@ -92,5 +103,25 @@ const setBalance = createAsyncThunk(
   }
 );
 
-export { register, logIn, logOut, refresh, googleAuth, setBalance };
+const fetchBalance = createAsyncThunk(
+  'auth/fetchBalance',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await API.get('auth/user/balance');
+      console.log('data ', data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
+export {
+  register,
+  logIn,
+  logOut,
+  refresh,
+  googleAuth,
+  setBalance,
+  fetchBalance,
+};

@@ -17,7 +17,6 @@ const defaultMaskOptions = {
 };
 
 export default function CurrencyInput({ maskOptions, ...inputProps }) {
-  console.log(inputProps);
 
   const currencyMask = createNumberMask({
     ...defaultMaskOptions,

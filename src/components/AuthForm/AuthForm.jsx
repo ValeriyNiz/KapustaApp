@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getMessage } from 'redux/auth/auth-selector';
 import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { ReactComponent as GoogleIcon } from '../../images/google.svg';
@@ -13,9 +14,15 @@ const AuthForm = () => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [shortLengthPassword, setShortLengthPassword] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
-  
+
   const dispatch = useDispatch();
   const message = useSelector(getMessage);
+
+  const navigate = useNavigate();
+
+  const goToExpensesPage = () => {
+    navigate("/expenses");
+  };
 
   const handleChange = evt => {
     setEmptyInput(false);
@@ -146,7 +153,7 @@ const AuthForm = () => {
             </p>
           </label>
           <div className={css.authBtn}>
-            <button className={css.btn} type="submit">
+            <button onClick={goToExpensesPage} className={css.btn} type="submit">
               Log in
             </button>
             <button className={css.btn} type="button" onClick={handleRegister}>

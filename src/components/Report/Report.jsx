@@ -12,56 +12,16 @@ import {
   XAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Cell,
 } from 'recharts';
-
-// const daaaata = [
-//   {
-//     name: 'Page A',
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: 'Page B',
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: 'Page C',
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: 'Page D',
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: 'Page E',
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: 'Page F',
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: 'Page G',
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];
 
 export const Report = () => {
   const { income } = data;
   const { categories } = income;
+
+  const a = categories
+    .find(item => item.category === 'Products')
+    .descriptions.sort((item1, item2) => item2.sum - item1.sum);
 
   const renderCustomizedLabel = () => {
     return props => {
@@ -113,37 +73,59 @@ export const Report = () => {
         </ul>
       </div>
 
-      <div className={css.wrapper}>
+      <div className={css.wrapperBar}>
         <ResponsiveContainer width="100%" aspect={2}>
           <BarChart
             className={css.box}
             // width={700}
             // height={500}
-            data={categories
-              .find(item => item.category === 'Transport')
-              .descriptions.sort((item1, item2) => item2.sum - item1.sum)}
+            data={a}
             margin={{
-              top: 20,
+              top: 40,
               right: 0,
               left: 0,
-              bottom: 20,
+              bottom: 0,
             }}
           >
             <CartesianGrid
               vertical={false}
-              horizontalPoints={[45, 90, 135, 180, 225, 270, 315, 360]}
+              // x={0}
+              // horizontalPoints={[
+              //   '0%',
+              //   '10%',
+              //   '20%',
+              //   '30%',
+              //   '40%',
+              //   '50%',
+              //   '60%',
+              //   '70%',
+              //   '80%',
+              //   '90%',
+              //   '100%',
+              // ]}
             />
-            <XAxis dataKey="description" padding={{ left: 20, right: 20 }} />
+            <XAxis
+              dataKey="description"
+              axisLine={false}
+              tickLine={false}
+              padding={{ left: 20, right: 20 }}
+            />
 
             {/* <Bar dataKey="description" fill="#FF751D" /> */}
             <Bar
               dataKey="sum"
-              fill="#FF751D"
-              maxBarSize={45}
+              // fill="#FF751D"
+              maxBarSize={60}
               minPointSize={5}
               radius={[10, 10, 0, 0]}
             >
               <LabelList dataKey="sum" content={renderCustomizedLabel()} />
+              {a.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={index % 3 === 0 ? '#FF751D' : '#FFDAC0'}
+                />
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -151,3 +133,6 @@ export const Report = () => {
     </div>
   );
 };
+
+// '#FF751D',
+// '#FFDAC0',

@@ -15,7 +15,6 @@ button {
 .wrapper {
   width: 280px;
   margin: 0 auto;
-  
 }
 
 .titleContainer {
@@ -39,22 +38,22 @@ button {
   margin-left: 20px;
 }
 @media screen and (max-width: 767.9px) {
-    .container {
-      margin: 0 auto;
-      max-width: 767px;
-      padding: 0 20px;
-    }
-   .list{
-    background-image: repeating-linear-gradient(
-    to top,
-    #000,
-    #000 1px,
-    transparent 1px,
-    transparent 135px
-  );
-  gap:40px 13px;
-   }
+  .container {
+    margin: 0 auto;
+    max-width: 767px;
+    padding: 0 20px;
   }
+  .list {
+    background-image: repeating-linear-gradient(
+      to top,
+      #000,
+      #000 1px,
+      transparent 1px,
+      transparent 135px
+    );
+    gap: 40px 13px;
+  }
+}
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1280px;
@@ -65,8 +64,8 @@ button {
     width: 704px;
     padding: 20px 40px;
   }
-  .list{
-    gap:40px 32px;
+  .list {
+    gap: 40px 32px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -74,16 +73,14 @@ button {
     width: 1280px;
     margin: 0 auto;
     padding: 0 123px;
-    /* background-color: #407946; */
   }
   .wrapper {
     padding: 20px 198px;
     width: 1034px;
   }
-  .list{
-    gap:40px 20px;
+  .list {
+    gap: 40px 20px;
   }
-
 }
 .sum {
   font-weight: 400;
@@ -97,7 +94,7 @@ button {
 
   color: #52555f;
 }
-.item:hover .icon{
+.item:hover .icon {
   fill: #ff751d;
 }
 .category {
@@ -134,14 +131,14 @@ button {
 .con {
   margin-bottom: 5px;
 }
-.backGround{
-  background: #F5F6FB;
-border-radius: 20px;
-width: 59px;
-height: 60px;
+.backGround {
+  background: #f5f6fb;
+  border-radius: 20px;
+  width: 59px;
+  height: 60px;
 }
-.item:hover .backGround{
-    background-color: #FFDAC0;
+.item:hover .backGround {
+  background-color: #ffdac0;
 }
 
 /* //__________________ */
@@ -149,7 +146,7 @@ height: 60px;
   .box {
     width: 1280px;
     height: 500px;
-    background-color: #F2F5FC;
+    background-color: #f2f5fc;
   }
 }
 
@@ -157,14 +154,21 @@ height: 60px;
   .box {
     width: 700px;
     height: 500px;
-    
   }
 }
 
 @media screen and (min-width: 1280px) {
+  .wrapperBar {
+    padding: 20px 138px;
+    width: 1034px;
+    background-color: #fff;
+    box-shadow: #000;
+    border-radius: 30px;
+  }
+
   .box {
     width: 700px;
     height: 500px;
-    background-color: #FFDAC0;
+    /* background-color: #407946; */
   }
 }

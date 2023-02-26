@@ -69,8 +69,8 @@ export const Summary = () => {
           <svg width={18} height={12}>
             <use href={`${Sprite}#icon-arrow-back`}></use>
           </svg>
+          <p className={css.arrowDesc}>Main Page</p>
         </button>
-        <p className={css.arrowDesc}>Main Page</p>
       </div>
       <div className={css.reversing}>
         <div className={css.balanceDiv}>

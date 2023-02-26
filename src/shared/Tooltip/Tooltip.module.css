@@ -8,6 +8,7 @@
   line-height: 20px;
   text-align: left;
   position: absolute;
+  z-index: 99;
   top: 58px;
 }
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { getMessage } from 'redux/auth/auth-selector';
 import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { ReactComponent as GoogleIcon } from '../../images/google.svg';

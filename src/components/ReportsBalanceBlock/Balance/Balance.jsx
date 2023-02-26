@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBalance, setBalance } from 'redux/auth/auth-operations';
-import { getBalance } from 'redux/report/report-selectors';
+import { getBalance } from 'redux/auth/auth-selector';
 
 import CurrencyInput from 'shared/CurrencyInput/CurrencyInput';
 import Tooltip from 'shared/Tooltip/Tooltip';

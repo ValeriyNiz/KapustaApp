@@ -1,57 +1,56 @@
-import Sprite from "../../images/currentPeriod.svg";
-import css from "../../components/Summary/Summary.module.css";
+import Sprite from '../../images/currentPeriod.svg';
+import css from '../../components/Summary/Summary.module.css';
 // import { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import {
   getSearchedMonth,
   getSearchedYear,
-} from "redux/report/report-selectors";
+  getBalance,
+} from 'redux/report/report-selectors';
 import {
   setSearchedMonth,
   setSearchedYear,
-} from "../../redux/report/report-slice";
-
-import { getBalance } from "redux/auth/auth-selector";
+} from '../../redux/report/report-slice';
 
 export const Summary = () => {
   const dispatch = useDispatch();
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const currentYear = 2023;
-  const currentMonth = "February";
+  const currentMonth = 'February';
 
   const balance = useSelector(getBalance);
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
 
   const toNext = () => {
-    if (searchedMonth === "December" && searchedYear !== currentYear) {
-      dispatch(setSearchedMonth("January"));
+    if (searchedMonth === 'December' && searchedYear !== currentYear) {
+      dispatch(setSearchedMonth('January'));
       dispatch(setSearchedYear(searchedYear + 1));
       return;
     }
-    const monthNow = monthNames.findIndex((month) => month === searchedMonth);
+    const monthNow = monthNames.findIndex(month => month === searchedMonth);
     dispatch(setSearchedMonth(monthNames[monthNow + 1]));
   };
   const toPrev = () => {
-    if (searchedMonth === "January") {
-      dispatch(setSearchedMonth("December"));
+    if (searchedMonth === 'January') {
+      dispatch(setSearchedMonth('December'));
       dispatch(setSearchedYear(searchedYear - 1));
       return;
     }
-    const monthNow = monthNames.findIndex((month) => month === searchedMonth);
+    const monthNow = monthNames.findIndex(month => month === searchedMonth);
     dispatch(setSearchedMonth(monthNames[monthNow - 1]));
   };
 
@@ -69,8 +68,8 @@ export const Summary = () => {
         <div className={css.balanceDiv}>
           <p className={css.balanceTitle}>Balance:</p>
           <div className={css.totalBalanceSumDiv}>
-            <span>{balance ? {balance}: "00.00"}</span>
-            <span style={{marginLeft: 4}}>UAH</span>
+            <span>{balance || '00.00'}</span>
+            <span style={{ marginLeft: 4 }}>UAH</span>
           </div>
         </div>
         <div className={css.titleDiv}>

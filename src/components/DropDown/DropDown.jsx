@@ -2,9 +2,12 @@ import css from './DropDown.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useEffect, useState } from 'react';
 
-export const DropDown = ({ options }) => {
+export const DropDown = ({
+  options,
+  selectedDropValue,
+  setSelectedDropValue,
+}) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
 
   useEffect(() => {
     const handler = () => setShowMenu(false);
@@ -15,8 +18,8 @@ export const DropDown = ({ options }) => {
   });
 
   const getDisplay = () => {
-    if (selectedValue) {
-      return selectedValue.label;
+    if (selectedDropValue) {
+      return selectedDropValue.label;
     }
 
     return 'Product category';
@@ -28,15 +31,15 @@ export const DropDown = ({ options }) => {
   };
 
   const onItemClick = option => {
-    setSelectedValue(option);
+    setSelectedDropValue(option);
   };
 
   const isSelected = option => {
-    if (!selectedValue) {
+    if (!selectedDropValue) {
       return false;
     }
 
-    return selectedValue.value === option.value;
+    return selectedDropValue.value === option.value;
   };
 
   return (

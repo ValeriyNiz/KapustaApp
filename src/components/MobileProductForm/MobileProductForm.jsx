@@ -1,10 +1,18 @@
 import { DropDown } from 'components/DropDown/DropDown';
 import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
+import { useState } from 'react';
 
 export const MobileProductForm = ({ options }) => {
+  const [selectedDropValue, setSelectedDropValue] = useState(null);
+
   const handleSubmit = evt => {
     evt.preventDefault();
+  };
+
+  const resetForm = () => {
+    document.getElementById('productForm').reset();
+    setSelectedDropValue(null);
   };
 
   return (
@@ -14,7 +22,7 @@ export const MobileProductForm = ({ options }) => {
           <use href={`${Sprite}#back-arrow`}></use>
         </svg>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="productForm">
         <div className={css.containerBG}>
           <input
             type="text"
@@ -23,7 +31,11 @@ export const MobileProductForm = ({ options }) => {
             className={css.inputName}
           />
           <div className={css.containerDrop}>
-            <DropDown options={options} />
+            <DropDown
+              options={options}
+              selectedDropValue={selectedDropValue}
+              setSelectedDropValue={setSelectedDropValue}
+            />
           </div>
           <div className={css.priceContainer}>
             <input
@@ -43,7 +55,11 @@ export const MobileProductForm = ({ options }) => {
           <button type="submit" className={`${css.button} ${css.submit}`}>
             Input
           </button>
-          <button type="button" className={`${css.button} ${css.clear}`}>
+          <button
+            type="button"
+            className={`${css.button} ${css.clear}`}
+            onClick={() => resetForm()}
+          >
             Clear
           </button>
         </div>

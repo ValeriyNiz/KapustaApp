@@ -10,23 +10,15 @@ import css from './Balance.module.css';
 export default function Balance() {
   const dispatch = useDispatch();
   const balanceRedux = useSelector(getBalance);
-  // console.log('balanceRedux', balanceRedux);
 
   const [inputValue, setinputValue] = useState(0);
   const [isSent, setIsSent] = useState(false);
 
   const handlerSubmit = e => {
     e.preventDefault();
-    // const inputBalance = +e.target.elements.balance.value
-    //   .split(' ')
-    //   .join('')
-    //   .slice(0, -3);
-
-    // if (inputBalance > 0) {
     console.log('inputValue ', inputValue);
     dispatch(setBalance({ balance: inputValue }));
     setIsSent(true);
-    // }
 
     return;
   };
@@ -47,7 +39,6 @@ export default function Balance() {
         <CurrencyInput
           type="text"
           name="balance"
-          // value={balValue}
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />

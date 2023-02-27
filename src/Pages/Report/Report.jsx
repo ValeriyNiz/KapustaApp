@@ -34,7 +34,6 @@ export const Report = () => {
   const totalReportObject = useSelector(getTotalReportObject);
   const [activeStatus, setActiveStatus] = useState('Income');
   const [categoriesArray, setCategoriesArray] = useState();
-  // console.log("catArr",categoriesArray)
   useEffect(() => {
     dispatch(
       fetchFullStatistics({

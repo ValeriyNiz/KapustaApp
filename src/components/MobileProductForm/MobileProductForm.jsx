@@ -5,11 +5,9 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
-// import { getChoice } from 'redux/report/report-selectors';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
-  // const choice = useSelector(getChoice);
   const dispatch = useDispatch();
   const location = useLocation();
   const isIncome = location.search.includes('income');

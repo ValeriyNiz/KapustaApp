@@ -11,7 +11,6 @@ import { useLocation } from 'react-router';
 import { useEffect } from 'react';
 
 export const MobileTable = () => {
-  // const choice = useSelector(getChoice);
   const data = useSelector(getAllTransactions);
   const location = useLocation();
   const isIncome = location.search.includes('income');

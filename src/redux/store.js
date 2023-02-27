@@ -7,10 +7,7 @@ import { reportReducer } from './report/report-slice';
 const persistConfig = {
   key: 'auth',
   storage,
-  whitelist: [
-    'accessToken',
-    // 'refreshToken', 'sid', 'user'
-  ],
+  whitelist: ['accessToken'],
 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
@@ -18,7 +15,6 @@ const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: false,
   }),
-  // Add other middlewares if needed
 ];
 
 const store = configureStore({

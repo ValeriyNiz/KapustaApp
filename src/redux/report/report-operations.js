@@ -59,9 +59,3 @@ export const fetchTransactions = createAsyncThunk(
     }
   }
 );
-
-// export const setChoice = createAction('report/setChoice', choice => {
-//   return {
-//     payload: { choice },
-//   };
-// });

@@ -1,12 +1,7 @@
 import css from './ExpIncNav.module.css';
-// import { useSelector } from 'react-redux';
-// import { getChoice } from 'redux/report/report-selectors';
-// import { setChoice } from 'redux/report/report-operations';
 import { useLocation, useNavigate } from 'react-router';
 
 export const ExpIncNav = () => {
-  // const choice = useSelector(getChoice);
-  // const dispatch = useDispatch();
   const location = useLocation();
   const isIncome = location.search.includes('income');
 
@@ -22,9 +17,6 @@ export const ExpIncNav = () => {
         className={`${css.button} ${!isIncome ? css.active : ''}`}
         onClick={() => {
           navigateToTab('expenses');
-          // if (choice !== 'expenses') {
-          //   dispatch(setChoice('expenses'));
-          // }
         }}
         type="button"
       >
@@ -34,9 +26,6 @@ export const ExpIncNav = () => {
         className={`${css.button} ${isIncome ? css.active : ''}`}
         onClick={() => {
           navigateToTab('income');
-          // if (choice !== 'income') {
-          //   dispatch(setChoice('income'));
-          // }
         }}
         type="button"
       >

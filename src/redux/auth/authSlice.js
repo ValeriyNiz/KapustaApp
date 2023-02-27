@@ -19,8 +19,6 @@ export const initialState = {
   isRefreshing: false,
   isLoading: false,
   message: '',
-  // refreshToken: null,
-  // sid: null,
 };
 
 const authSlice = createSlice({
@@ -36,8 +34,6 @@ const authSlice = createSlice({
       state.user.email = payload.user;
       state.isLoading = false;
       state.message = 'Verify your email, please.';
-      // state.refreshToken = payload.refreshToken;
-      // state.sid = payload.sid;
     },
     [register.rejected]: (state, { payload }) => {
       state.isLoading = false;

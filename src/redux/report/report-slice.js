@@ -4,11 +4,9 @@ import {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
-  // setChoice,
 } from './report-operations';
 export const initialState = {
   allTransactions: [],
-  // choice: 'expenses',
   totalReportObject: null,
   searchedMonth: 'March',
   searchedYear: 2023,
@@ -27,8 +25,6 @@ const reportSlice = createSlice({
   },
   extraReducers: {
     [fetchFullStatistics.fulfilled](state, action) {
-      // console.log('HHHH');
-      // console.log('dataa', action.payload.data);
       state.totalReportObject = action.payload.data;
     },
     [fetchTransactions.fulfilled](state, action) {
@@ -42,9 +38,6 @@ const reportSlice = createSlice({
         t => t._id !== action.payload
       );
     },
-    // [setChoice]: (state, action) => {
-    //   state.choice = action.payload.choice;
-    // },
   },
 });
 export const { setSearchedMonth, setSearchedYear } = reportSlice.actions;

@@ -15,8 +15,6 @@ import { useEffect } from 'react';
 import { refresh } from 'redux/auth/auth-operations';
 import Loader from 'shared/Loader/Loader';
 import { Page404 } from 'Pages/Page404/Page404';
-// import PrivateRoute from 'routes/PrivateRoute/PrivateRoute';
-// import RestrictedRoute from 'routes/RestrictedRoute/RestrictedRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -27,16 +25,6 @@ export const App = () => {
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
-
-  // To check authorization when reload page.
-  // The second part (save authorization to localStorage) should be implemented when response from server is recieved
-  // useEffect(() => {
-  //  const auth = localStorage.get('auth');
-  //  if (!isLogin && auth) {
-  //     dispatch(setToAuthStorage(JSON.parse(auth)))
-  //   }
-  // }
-  // }, [isLogin])
 
   const routers = isLogin ? (
     <>

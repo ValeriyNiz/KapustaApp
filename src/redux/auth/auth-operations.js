@@ -1,16 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API, authToken } from 'API';
-// import { toast } from 'react-toastify';
 
 const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await API.post('auth/register', credentials);
-      // console.log('data in register: ', data);
       return data;
     } catch (error) {
-      // console.log('error from register: ', error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -22,7 +19,6 @@ const logIn = createAsyncThunk(
     try {
       const { data } = await API.post('auth/login', credentials);
       authToken.set(data.token);
-      // console.log('data in login', data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -43,7 +39,6 @@ const logOut = createAsyncThunk(
 );
 
 const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  // console.log('reduxState ', thunkAPI.getState().auth);
   const { accessToken } = thunkAPI.getState().auth;
 
   if (!accessToken) {
@@ -76,7 +71,6 @@ const setBalance = createAsyncThunk(
   'auth/setBalance',
   async (balance, { rejectWithValue }) => {
     try {
-      // console.log('balance in operations', balance);
       const { data } = await API.patch('auth/users/balance', balance);
       return data;
     } catch (error) {
@@ -85,12 +79,4 @@ const setBalance = createAsyncThunk(
   }
 );
 
-export {
-  register,
-  logIn,
-  logOut,
-  refresh,
-  googleAuth,
-  setBalance,
-  // fetchBalance,
-};
+export { register, logIn, logOut, refresh, googleAuth, setBalance };

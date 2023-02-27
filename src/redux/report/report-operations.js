@@ -7,14 +7,10 @@ export const fetchFullStatistics = createAsyncThunk(
     try {
       const { year, currentMonth } = params;
 
-
-      const data = await API.post(
-        'http://localhost:3030/api/transaction/fullStatistics',
-        {
-          year,
-          currentMonth,
-        }
-      );
+      const data = await API.post('/transactions/fullStatistics', {
+        year,
+        currentMonth,
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -41,6 +37,7 @@ export const addTransaction = createAsyncThunk(
 
 export const deleteTransaction = createAsyncThunk(
   'report/deleteTransaction',
+
   async (id, { rejectWithValue }) => {
     try {
       const res = await API.delete(`/transactions/${id}`);
@@ -55,7 +52,7 @@ export const fetchTransactions = createAsyncThunk(
   'report/fetchTransactions',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await API.get(`/transactions`);
+      const res = await API.get('/transactions');
       return res;
     } catch (error) {
       return rejectWithValue(error.message);

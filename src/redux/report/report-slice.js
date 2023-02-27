@@ -26,10 +26,9 @@ const reportSlice = createSlice({
     },
   },
   extraReducers: {
-    // [fetchFullStatistics.pending](state, action) {},
     [fetchFullStatistics.fulfilled](state, action) {
-      console.log('HHHH');
-      console.log('dataa', action.payload.data);
+      // console.log('HHHH');
+      // console.log('dataa', action.payload.data);
       state.totalReportObject = action.payload.data;
     },
     [fetchTransactions.fulfilled](state, action) {
@@ -44,7 +43,6 @@ const reportSlice = createSlice({
     [setChoice]: (state, action) => {
       state.choice = action.payload.choice;
     },
-    // [fetchFullStatistics.rejected](state, action) {},
   },
 });
 export const { setSearchedMonth, setSearchedYear } = reportSlice.actions;

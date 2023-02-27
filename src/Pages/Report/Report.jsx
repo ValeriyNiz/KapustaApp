@@ -6,7 +6,6 @@ import {
   getTotalReportObject,
   getSearchedMonth,
   getSearchedYear,
-//   getDifference,
 } from 'redux/report/report-selectors';
 
 import css from './Report.module.css';
@@ -14,31 +13,28 @@ import Sprite from '../../images/currentPeriod.svg';
 import { chooseIcon } from './chooseIcon';
 
 const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 export const Report = () => {
-  
   const dispatch = useDispatch();
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
   const totalReportObject = useSelector(getTotalReportObject);
   const [activeStatus, setActiveStatus] = useState('Income');
   const [categoriesArray, setCategoriesArray] = useState();
-//   let incomCategoriesSorted;
-//   let expensesCategoriesSorted;
-console.log("catArr",categoriesArray)
+  // console.log("catArr",categoriesArray)
   useEffect(() => {
     dispatch(
       fetchFullStatistics({
@@ -47,7 +43,7 @@ console.log("catArr",categoriesArray)
       })
     );
   }, [searchedMonth, searchedYear, dispatch]);
-  
+
   useEffect(() => {
     if (totalReportObject) {
       const { income, expenses } = totalReportObject;
@@ -64,16 +60,18 @@ console.log("catArr",categoriesArray)
           (first, second) => first.sum - second.sum
         );
       }
-      setCategoriesArray(activeStatus === 'Expenses'
-        ? expensesCategoriesSorted
-        : incomCategoriesSorted);
+      setCategoriesArray(
+        activeStatus === 'Expenses'
+          ? expensesCategoriesSorted
+          : incomCategoriesSorted
+      );
     }
   }, [activeStatus, totalReportObject]);
 
   const onStatusChange = () => {
     setActiveStatus(activeStatus === 'Expenses' ? 'Income' : 'Expenses');
-  }
-  
+  };
+
   return (
     <div className={css.container}>
       <div className={css.wrapper}>

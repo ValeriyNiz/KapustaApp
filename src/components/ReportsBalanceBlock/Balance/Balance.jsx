@@ -10,7 +10,7 @@ import css from './Balance.module.css';
 export default function Balance() {
   const dispatch = useDispatch();
   const balanceRedux = useSelector(getBalance);
-  console.log('balanceRedux', balanceRedux);
+  // console.log('balanceRedux', balanceRedux);
 
   const [inputValue, setinputValue] = useState(0);
   const [isSent, setIsSent] = useState(false);

@@ -9,7 +9,7 @@ export const TotalSum = () => {
   const [totalExpenses, setTotalExpenses] = useState(0);
   useEffect(() => {
     if (totalReportObject) {
-      console.log('totalReportObject', totalReportObject);
+      // console.log('totalReportObject', totalReportObject);
       const income = totalReportObject.income;
       const expenses = totalReportObject.expenses;
       if (income !== undefined) {

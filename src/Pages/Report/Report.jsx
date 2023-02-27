@@ -38,6 +38,7 @@ export const Report = () => {
   const [categoriesArray, setCategoriesArray] = useState();
 //   let incomCategoriesSorted;
 //   let expensesCategoriesSorted;
+console.log("catArr",categoriesArray)
   useEffect(() => {
     dispatch(
       fetchFullStatistics({
@@ -89,7 +90,7 @@ export const Report = () => {
             </svg>
           </button>
         </div>
-        {categoriesArray === undefined ? (
+        {categoriesArray === null ? (
           <div className={css.empty}>There isn`t any data in this period</div>
         ) : (
           <ul className={css.list}>

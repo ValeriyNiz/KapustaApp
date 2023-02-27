@@ -1,13 +1,13 @@
 import css from './Header.module.css';
 import Sprite from '../../images/cabagge/sprite.svg';
 import UserMenu from '../UserMenu/UserMenu';
-import { getIsLoggedIn } from 'redux/auth/auth-selector';
+import { getIsLogin } from 'redux/auth/auth-selector';
 
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export const Header = () => {
-  const isLogin = useSelector(getIsLoggedIn);
+  const isLogin = useSelector(getIsLogin);
 
   return (
     <header className={css.header}>

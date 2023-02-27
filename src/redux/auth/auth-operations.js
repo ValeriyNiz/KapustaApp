@@ -7,9 +7,11 @@ const register = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await API.post('auth/register', credentials);
+      console.log('data in register: ', data);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      console.log('error from register: ', error);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -20,59 +22,73 @@ const logIn = createAsyncThunk(
     try {
       const { data } = await API.post('auth/login', credentials);
       authToken.set(data.token);
-      console.log('data ', data);
+      console.log('data in login', data);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
-      // if (error.response.status === 401) {
-      //   toast.error('Server error, please try again later');
-      // } else {
-      //   toast.error('Wrong email or password, please try again.');
-      // }
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await API.post('auth/logout');
+      authToken.unset();
+    } catch (error) {
+      return rejectWithValue(error.response.statusText);
+    }
+  }
+);
+
+const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  console.log('reduxState ', thunkAPI.getState().auth);
+  const { accessToken } = thunkAPI.getState().auth;
+
+  if (!accessToken) {
+    return thunkAPI.rejectWithValue('No valid token');
+  }
+  authToken.set(accessToken);
+
   try {
-    await API.post('auth/logout');
-    authToken.unset();
+    const { data } = await API.get('auth/users/current');
+    return data;
   } catch (error) {
-    toast.error('Server error, please try again later');
-    return false;
+    return thunkAPI.rejectWithValue(error.response.statusText);
   }
 });
 
-const refresh = createAsyncThunk(
-  'auth/refresh',
-  async (_, { getState, rejectWithValue }) => {
-    const state = getState();
-    const prevSid = state.auth.sid;
-    const prevRefresh = state.auth.refreshToken;
-    if (!prevRefresh || !prevSid) {
-      return rejectWithValue('something went wrong');
-    }
-    try {
-      const response = await API.post(
-        '/auth/refresh',
-        { sid: prevSid },
-        { headers: { Authorization: `Bearer ${prevRefresh}` } }
-      );
+// const refresh = createAsyncThunk(
+//   'auth/refresh',
+//   async (_, { getState, rejectWithValue }) => {
+//     const state = getState();
+//     const prevSid = state.auth.sid;
+//     const prevRefresh = state.auth.refreshToken;
+//     if (!prevRefresh || !prevSid) {
+//       return rejectWithValue('something went wrong');
+//     }
+//     try {
+//       const response = await API.post(
+//         '/auth/refresh',
+//         { sid: prevSid },
+//         { headers: { Authorization: `Bearer ${prevRefresh}` } }
+//       );
 
-      authToken.set(response.data.newAccessToken);
+//       authToken.set(response.data.newAccessToken);
 
-      return response.data;
-    } catch (error) {
-      authToken.unset();
+//       return response.data;
+//     } catch (error) {
+//       authToken.unset();
 
-      if (error.response && error.response.status !== 401) {
-        toast.error('We got an error! Dont worry and try again.');
-      }
+//       if (error.response && error.response.status !== 401) {
+//         toast.error('We got an error! Dont worry and try again.');
+//       }
 
-      return rejectWithValue('something went wrong');
-    }
-  }
-);
+//       return rejectWithValue('something went wrong');
+//     }
+//   }
+// );
 
 const googleAuth = createAsyncThunk(
   'auth/googleAuth',
@@ -89,13 +105,13 @@ const googleAuth = createAsyncThunk(
 
 const setBalance = createAsyncThunk(
   'auth/setBalance',
-  async (balance, { rejectWithValue, getState }) => {
-    const { accessToken } = getState().auth;
-    console.log('accessToken in setbalance oper', accessToken);
-    authToken.set(accessToken);
+  async (balance, { rejectWithValue }) => {
+    // const { accessToken } = getState().auth;
+    // console.log('accessToken in setbalance oper', accessToken);
+    // authToken.set(accessToken);
     try {
       console.log('balance in operations', balance);
-      const { data } = await API.patch('auth/user/balance', balance);
+      const { data } = await API.patch('auth/users/balance', balance);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -103,18 +119,18 @@ const setBalance = createAsyncThunk(
   }
 );
 
-const fetchBalance = createAsyncThunk(
-  'auth/fetchBalance',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await API.get('auth/user/balance');
-      console.log('data ', data);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// const fetchBalance = createAsyncThunk(
+//   'auth/fetchBalance',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const { data } = await API.get('auth/user/balance');
+//       console.log('data ', data);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export {
   register,
@@ -123,5 +139,5 @@ export {
   refresh,
   googleAuth,
   setBalance,
-  fetchBalance,
+  // fetchBalance,
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMessage } from 'redux/auth/auth-selector';
+import { getIsLoading, getMessage } from 'redux/auth/auth-selector';
+import Loader from 'shared/Loader/Loader';
 import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { ReactComponent as GoogleIcon } from '../../images/google.svg';
 import { logIn, register } from '../../redux/auth/auth-operations';
@@ -16,9 +17,12 @@ const AuthForm = () => {
 
   const dispatch = useDispatch();
   const message = useSelector(getMessage);
+  const isLoading = useSelector(getIsLoading);
 
   const handleChange = evt => {
     setEmptyInput(false);
+    setShortLengthPassword(false);
+    setInvalidEmail(false);
 
     switch (evt.target.name) {
       case 'email':
@@ -37,43 +41,47 @@ const AuthForm = () => {
   const checkValidData = () => {
     if (email === '') {
       setEmptyInput(true);
+      return
     }
 
     if (!email.includes('@')) {
       setInvalidEmail(true);
+      return
     }
+
     if (password.length < 8) {
       setShortLengthPassword(true);
+      return
     }
 
     return;
   };
 
-  const handleLogin = evt => {
+  const handleLogin = async(evt) => {
     evt.preventDefault();
+    await checkValidData()
     const credentials = { email, password };
 
-    if (checkValidData()) {
+    if (emptyInput || invalidEmail || shortLengthPassword) {
       return;
     }
-    dispatch(logIn(credentials));
-    resetForm();
+    await dispatch(logIn(credentials));
     setIsModalActive(true);
+    resetForm();
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    checkValidData()
     const credentials = { email, password };
-    if (checkValidData()) {
+
+    if (emptyInput || invalidEmail || shortLengthPassword) {
       return;
     }
-    dispatch(register(credentials));
+    await dispatch(register(credentials));
     setIsModalActive(true);
-    // .unwrap()
-    // .then(() => dispatch(logIn(credentials)));
   };
 
   const resetForm = () => {
-    setEmail('');
     setPassword('');
   };
 
@@ -147,14 +155,22 @@ const AuthForm = () => {
                   'Password length must be at least 8 characters'}
             </p>
           </label>
-          <div className={css.authBtn}>
-            <button onClick={handleLogin} className={css.btn} type="submit">
-              Log in
-            </button>
-            <button className={css.btn} type="button" onClick={handleRegister}>
-              Registration
-            </button>
-          </div>
+          {isLoading ? (
+            <Loader height = '130'/>
+          ) : (
+            <div className={css.authBtn}>
+              <button onClick={handleLogin} className={css.btn} type="submit">
+                Log in
+              </button>
+              <button
+                className={css.btn}
+                type="button"
+                onClick={handleRegister}
+              >
+                Registration
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </>

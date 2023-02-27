@@ -4,9 +4,11 @@ import css from './UserMenu.module.css';
 import Sprite from '../../images/sprite.svg';
 import Modal from '../../shared/Modal/Modal';
 import { useState } from 'react';
+import { getUserName } from 'redux/auth/auth-selector';
+import { logOut } from 'redux/auth/auth-operations';
 
 const UserMenu = () => {
-  const userName = useSelector(state => state.user?.user?.email);
+  const userName = useSelector(getUserName);
   const avatarName = userName?.slice(0, 1).toLocaleUpperCase();
 
   const [isModalActive, setIsModalActive] = useState(false);
@@ -21,7 +23,7 @@ const UserMenu = () => {
 
   return (
     <div className={css.userMenu}>
-      <Modal setActive={toggleModal} active={isModalActive}>
+      <Modal action={logOut} setActive={toggleModal} active={isModalActive}>
         Do you really want to leave?
       </Modal>
       <p className={css.avatarName}>{avatarName || 'U'}</p>

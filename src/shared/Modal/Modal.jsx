@@ -4,7 +4,7 @@
 // {/* LOGOUT or delete button */}
 // <button onClick={() => setModalActive(true)}>Exit</button>
 
-// <Modal active={modalActive} setActive={setModalActive}>Do you really want to leave?</Modal>
+// <Modal action={logOut} active={modalActive} setActive={setModalActive}>Do you really want to leave?</Modal>
 
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
@@ -13,10 +13,13 @@ import PropTypes from 'prop-types';
 
 import Button from 'shared/Button/Button';
 import css from './Modal.module.css';
+import { useDispatch } from 'react-redux';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ active, setActive, children }) {
+export default function Modal({ action, active, setActive, children }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape' && active) {
@@ -30,6 +33,11 @@ export default function Modal({ active, setActive, children }) {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [active, setActive]);
+
+  const handleClick = () => {
+    dispatch(action());
+    setActive(false);
+  };
 
   return createPortal(
     <div
@@ -60,10 +68,7 @@ export default function Modal({ active, setActive, children }) {
           <Button
             type="submit"
             variant="accentBtn"
-            onClick={() => {
-              console.log('Delete transaction or logout');
-              setActive(false);
-            }}
+            onClick={handleClick}
           >
             YES
           </Button>

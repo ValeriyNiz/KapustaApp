@@ -1,5 +1,5 @@
 import { API } from 'API';
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchFullStatistics = createAsyncThunk(
   'report/fetchFullStatistics',
@@ -40,8 +40,8 @@ export const deleteTransaction = createAsyncThunk(
 
   async (id, { rejectWithValue }) => {
     try {
-      const res = await API.delete(`/transactions/${id}`);
-      return res;
+      await API.delete(`/transactions/${id}`);
+      return id;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -60,8 +60,8 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
-export const setChoice = createAction('report/setChoice', choice => {
-  return {
-    payload: { choice },
-  };
-});
+// export const setChoice = createAction('report/setChoice', choice => {
+//   return {
+//     payload: { choice },
+//   };
+// });

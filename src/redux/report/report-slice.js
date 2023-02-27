@@ -4,11 +4,11 @@ import {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
-  setChoice,
+  // setChoice,
 } from './report-operations';
 export const initialState = {
   allTransactions: [],
-  choice: 'expenses',
+  // choice: 'expenses',
   totalReportObject: null,
   searchedMonth: 'February',
   searchedYear: 2023,
@@ -38,11 +38,13 @@ const reportSlice = createSlice({
       state.allTransactions.push(action.payload.data);
     },
     [deleteTransaction.fulfilled](state, action) {
-      state.allTransactions.filter(t => t._id !== action.payload.data.id);
+      state.allTransactions = state.allTransactions.filter(
+        t => t._id !== action.payload
+      );
     },
-    [setChoice]: (state, action) => {
-      state.choice = action.payload.choice;
-    },
+    // [setChoice]: (state, action) => {
+    //   state.choice = action.payload.choice;
+    // },
   },
 });
 export const { setSearchedMonth, setSearchedYear } = reportSlice.actions;

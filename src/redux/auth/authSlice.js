@@ -49,6 +49,7 @@ const authSlice = createSlice({
       state.message = '';
     },
     [logIn.fulfilled]: (state, { payload }) => {
+      state.user = { email: payload.email, balance: payload.balance };
       state.accessToken = payload.token;
       state.isLoading = false;
       state.isLogin = true;

@@ -2,15 +2,17 @@ import { DropDown } from 'components/DropDown/DropDown';
 import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
-import { getChoice } from 'redux/report/report-selectors';
+// import { getChoice } from 'redux/report/report-selectors';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
-  const choice = useSelector(getChoice);
+  // const choice = useSelector(getChoice);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const isIncome = location.search.includes('income');
 
   const resetForm = () => {
     document.getElementById('productForm').reset();
@@ -24,7 +26,7 @@ export const MobileProductForm = () => {
       dispatch(
         addTransaction({
           dateTransaction: new Date(),
-          income: choice === 'income',
+          income: isIncome,
           sum: form.elements.price.value,
           category: selectedDropValue.label,
           description: form.elements.productName.value,

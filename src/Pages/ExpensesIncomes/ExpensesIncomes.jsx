@@ -7,13 +7,9 @@ import { TabletForm } from 'components/TabletForm/TabletForm';
 import { TabletTable } from 'components/TabletTable/TabletTable';
 import { ToTransaction } from 'components/ToTransaction/ToTransaction';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchTransactions } from 'redux/report/report-operations';
 import css from './ExpensesIncomes.module.css';
 
 export const ExpensesIncomes = () => {
-  const dispatch = useDispatch();
-  const [choice, setChoice] = useState('expenses');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(
     window.innerWidth >= 768 && window.innerWidth < 1280
@@ -28,10 +24,6 @@ export const ExpensesIncomes = () => {
     window.addEventListener('resize', updateMedia);
     return () => window.removeEventListener('resize', updateMedia);
   });
-
-  useEffect(() => {
-    dispatch(fetchTransactions());
-  }, [dispatch]);
 
   const options = [
     { value: 'transport', label: 'Transport' },
@@ -62,24 +54,24 @@ export const ExpensesIncomes = () => {
         <Background type="Secondary">
           <ToTransaction />
           <ReportsBalanceBlock />
-          <MobileTable choice={choice} />
-          <ExpIncNav choice={choice} setChoice={setChoice} />
+          <MobileTable />
+          <ExpIncNav />
         </Background>
       ) : (
         <Background type="Secondary">
           <div className={css.container}>
             <ReportsBalanceBlock />
-            <ExpIncNav choice={choice} setChoice={setChoice} />
+            <ExpIncNav />
             <div className={css.section}>
               <TabletForm options={options} />
               {!isTablet ? (
                 <div className={css.bottomContainer}>
-                  <TabletTable choice={choice} />
+                  <TabletTable />
                   <SummaryTable sum={summary} />
                 </div>
               ) : (
                 <div className={css.tableContainer}>
-                  <TabletTable choice={choice} />
+                  <TabletTable />
                 </div>
               )}
             </div>

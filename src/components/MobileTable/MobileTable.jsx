@@ -1,11 +1,12 @@
 import css from './MobileTable.module.css';
 import Sprite from '../../images/sprite.svg';
 import { DateComponent } from 'components/DateComponent/DateComponent';
-import { getAllTransactions } from 'redux/report/report-selectors';
+import { getAllTransactions, getChoice } from 'redux/report/report-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTransaction } from 'redux/report/report-operations';
 
-export const MobileTable = ({ choice }) => {
+export const MobileTable = () => {
+  const choice = useSelector(getChoice);
   const data = useSelector(getAllTransactions);
   let tableData = null;
   if (choice === 'expenses') {
@@ -29,14 +30,14 @@ export const MobileTable = ({ choice }) => {
               <div>
                 <p className={css.name}>{t.description}</p>
                 <div className={css.infoDiv}>
-                  <p className={css.info}>{t.dateTransaction}</p>
+                  <p className={css.info}>{t.dateTransaction.slice(0, 10)}</p>
                   <p className={css.info}>{t.category}</p>
                 </div>
               </div>
               {choice === 'expenses' ? (
-                <p className={css.value}>- {t.sum}</p>
+                <p className={css.value}>- {t.sum} UAH</p>
               ) : (
-                <p className={`${css.value} ${css.income}`}>{t.sum}</p>
+                <p className={`${css.value} ${css.income}`}>{t.sum} UAH</p>
               )}
               <svg
                 width="18"

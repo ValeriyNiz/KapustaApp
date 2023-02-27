@@ -3,17 +3,35 @@ import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTransaction } from 'redux/report/report-operations';
+import { getChoice } from 'redux/report/report-selectors';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
-
-  const handleSubmit = evt => {
-    evt.preventDefault();
-  };
+  const choice = useSelector(getChoice);
+  const dispatch = useDispatch();
 
   const resetForm = () => {
     document.getElementById('productForm').reset();
     setSelectedDropValue(null);
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.target;
+    if (selectedDropValue) {
+      dispatch(
+        addTransaction({
+          dateTransaction: new Date(),
+          income: choice === 'income',
+          sum: form.elements.price.value,
+          category: selectedDropValue.label,
+          description: form.elements.productName.value,
+        })
+      );
+      resetForm();
+    }
   };
 
   const navigate = useNavigate();

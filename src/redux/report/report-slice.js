@@ -4,9 +4,11 @@ import {
   fetchTransactions,
   addTransaction,
   deleteTransaction,
+  setChoice,
 } from './report-operations';
 export const initialState = {
   allTransactions: [],
+  choice: 'expenses',
   totalReportObject: null,
   searchedMonth: 'February',
   searchedYear: 2023,
@@ -15,7 +17,7 @@ export const initialState = {
 const reportSlice = createSlice({
   name: 'report',
   initialState,
-  reducers:{
+  reducers: {
     setSearchedMonth: (state, action) => {
       state.searchedMonth = action.payload;
     },
@@ -24,21 +26,23 @@ const reportSlice = createSlice({
     },
   },
   extraReducers: {
-    
     // [fetchFullStatistics.pending](state, action) {},
     [fetchFullStatistics.fulfilled](state, action) {
-      console.log("HHHH")
-      console.log("dataa",action.payload.data)
+      console.log('HHHH');
+      console.log('dataa', action.payload.data);
       state.totalReportObject = action.payload.data;
     },
     [fetchTransactions.fulfilled](state, action) {
-      state.allTransactions = action.payload;
+      state.allTransactions = action.payload.data;
     },
     [addTransaction.fulfilled](state, action) {
-      state.allTransactions.push(action.payload);
+      state.allTransactions.push(action.payload.data);
     },
     [deleteTransaction.fulfilled](state, action) {
-      state.allTransactions.filter(t => t._id !== action.payload.id);
+      state.allTransactions.filter(t => t._id !== action.payload.data.id);
+    },
+    [setChoice]: (state, action) => {
+      state.choice = action.payload.choice;
     },
     // [fetchFullStatistics.rejected](state, action) {},
   },

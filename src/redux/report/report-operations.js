@@ -1,5 +1,5 @@
 import { API } from 'API';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchFullStatistics = createAsyncThunk(
   'report/fetchFullStatistics',
@@ -7,11 +7,14 @@ export const fetchFullStatistics = createAsyncThunk(
     try {
       const { year, currentMonth } = params;
 
-      const data = await API.post('/transaction/fullStatistics', {
-        year,
-        currentMonth,
-      });
-      //console.log('data', data);
+
+      const data = await API.post(
+        'http://localhost:3030/api/transaction/fullStatistics',
+        {
+          year,
+          currentMonth,
+        }
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -21,7 +24,7 @@ export const fetchFullStatistics = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   'report/addTransaction',
-  async (inputData, rejectWithValue) => {
+  async (inputData, { rejectWithValue }) => {
     try {
       let res = null;
       if (!inputData.income) {
@@ -38,7 +41,7 @@ export const addTransaction = createAsyncThunk(
 
 export const deleteTransaction = createAsyncThunk(
   'report/deleteTransaction',
-  async (id, rejectWithValue) => {
+  async (id, { rejectWithValue }) => {
     try {
       const res = await API.delete(`/transactions/${id}`);
       return res;
@@ -50,7 +53,7 @@ export const deleteTransaction = createAsyncThunk(
 
 export const fetchTransactions = createAsyncThunk(
   'report/fetchTransactions',
-  async (_, rejectWithValue) => {
+  async (_, { rejectWithValue }) => {
     try {
       const res = await API.get(`/transactions`);
       return res;
@@ -59,3 +62,9 @@ export const fetchTransactions = createAsyncThunk(
     }
   }
 );
+
+export const setChoice = createAction('report/setChoice', choice => {
+  return {
+    payload: { choice },
+  };
+});

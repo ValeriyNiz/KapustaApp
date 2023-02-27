@@ -1,10 +1,15 @@
 import css from './TabletTable.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTransactions } from 'redux/report/report-selectors';
-import { deleteTransaction } from 'redux/report/report-operations';
+import { getAllTransactions, getChoice } from 'redux/report/report-selectors';
+import {
+  deleteTransaction,
+  fetchTransactions,
+} from 'redux/report/report-operations';
+import { useEffect } from 'react';
 
-export const TabletTable = ({ choice }) => {
+export const TabletTable = () => {
+  const choice = useSelector(getChoice);
   const data = useSelector(getAllTransactions);
   let tableData = null;
   if (choice === 'expenses') {
@@ -14,6 +19,11 @@ export const TabletTable = ({ choice }) => {
   }
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
+
   const handleDelete = id => {
     dispatch(deleteTransaction(id));
   };
@@ -31,15 +41,17 @@ export const TabletTable = ({ choice }) => {
       <tbody>
         {tableData.map(t => (
           <tr key={t._id}>
-            <td>{t.dateTransaction}</td>
+            <td>{t.dateTransaction.slice(0, 10)}</td>
             <td>{t.description}</td>
             <td>{t.category}</td>
             <td>
               <div className={css.deleteDiv}>
                 {choice === 'expenses' ? (
-                  <span className={css.value}>- {t.sum}</span>
+                  <span className={css.value}>- {t.sum} UAH</span>
                 ) : (
-                  <span className={`${css.value} ${css.income}`}>{t.sum}</span>
+                  <span className={`${css.value} ${css.income}`}>
+                    {t.sum} UAH
+                  </span>
                 )}
                 <svg
                   width="18"

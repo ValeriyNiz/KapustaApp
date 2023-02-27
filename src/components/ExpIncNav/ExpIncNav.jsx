@@ -1,14 +1,19 @@
 import css from './ExpIncNav.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChoice } from 'redux/report/report-selectors';
+import { setChoice } from 'redux/report/report-operations';
 
-export const ExpIncNav = ({ setChoice, choice }) => {
+export const ExpIncNav = () => {
+  const choice = useSelector(getChoice);
+  const dispatch = useDispatch();
+
   return (
     <div className={css.nav}>
       <button
         className={`${css.button} ${choice === 'expenses' ? css.active : ''}`}
         onClick={() => {
           if (choice !== 'expenses') {
-            setChoice('expenses');
+            dispatch(setChoice('expenses'));
           }
         }}
         type="button"
@@ -19,7 +24,7 @@ export const ExpIncNav = ({ setChoice, choice }) => {
         className={`${css.button} ${choice === 'income' ? css.active : ''}`}
         onClick={() => {
           if (choice !== 'income') {
-            setChoice('income');
+            dispatch(setChoice('income'));
           }
         }}
         type="button"
@@ -28,9 +33,4 @@ export const ExpIncNav = ({ setChoice, choice }) => {
       </button>
     </div>
   );
-};
-
-ExpIncNav.propTypes = {
-  setChoice: PropTypes.func.isRequired,
-  choice: PropTypes.string.isRequired,
 };

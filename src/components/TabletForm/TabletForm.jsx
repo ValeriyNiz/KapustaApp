@@ -3,11 +3,13 @@ import { DropDown } from 'components/DropDown/DropDown';
 import css from './TabletForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
+import { getChoice } from 'redux/report/report-selectors';
 
 export const TabletForm = ({ options }) => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
+  const choice = useSelector(getChoice);
   const dispatch = useDispatch();
 
   const resetForm = () => {
@@ -22,9 +24,9 @@ export const TabletForm = ({ options }) => {
       dispatch(
         addTransaction({
           dateTransaction: new Date(),
-          income: false,
+          income: choice === 'income',
           sum: form.elements.price.value,
-          category: selectedDropValue,
+          category: selectedDropValue.label,
           description: form.elements.productName.value,
         })
       );

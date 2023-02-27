@@ -1,67 +1,58 @@
-import { useMemo } from 'react';
-import { useTable } from 'react-table';
 import css from './TabletTable.module.css';
 import Sprite from '../../images/sprite.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTransactions } from 'redux/report/report-selectors';
+import { deleteTransaction } from 'redux/report/report-operations';
 
-export const TabletTable = ({ data, choice }) => {
-  const columns = useMemo(
-    () => [
-      { Header: 'Date', accessor: 'date' },
-      { Header: 'Description', accessor: 'name' },
-      { Header: 'Category', accessor: 'category' },
-      { Header: 'Sum', accessor: 'value' },
-    ],
-    []
-  );
+export const TabletTable = ({ choice }) => {
+  const data = useSelector(getAllTransactions);
+  let tableData = null;
+  if (choice === 'expenses') {
+    tableData = data.filter(({ income }) => !income);
+  } else {
+    tableData = data.filter(({ income }) => income);
+  }
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data,
-    });
+  const dispatch = useDispatch();
+  const handleDelete = id => {
+    dispatch(deleteTransaction(id));
+  };
 
   return (
-    <table {...getTableProps()} cellSpacing="0">
+    <table cellSpacing="0">
       <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()} className={css.headRow}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Sum</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map(t => (
+          <tr key={t._id}>
+            <td>{t.dateTransaction}</td>
+            <td>{t.description}</td>
+            <td>{t.category}</td>
+            <td>
+              <div className={css.deleteDiv}>
+                {choice === 'expenses' ? (
+                  <span className={css.value}>- {t.sum}</span>
+                ) : (
+                  <span className={`${css.value} ${css.income}`}>{t.sum}</span>
+                )}
+                <svg
+                  width="18"
+                  height="18"
+                  className={css.bin}
+                  onClick={() => handleDelete(t._id)}
+                >
+                  <use href={`${Sprite}#bin`}></use>
+                </svg>
+              </div>
+            </td>
           </tr>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell, idx) => {
-                if (idx === 3) {
-                  return (
-                    <td {...cell.getCellProps()}>
-                      <div className={css.deleteDiv}>
-                        {choice === 'expenses' ? (
-                          <span className={css.value}>
-                            - {cell.render('Cell')}
-                          </span>
-                        ) : (
-                          <span className={`${css.value} ${css.income}`}>
-                            {cell.render('Cell')}
-                          </span>
-                        )}
-                        <svg width="18" height="18" className={css.bin}>
-                          <use href={`${Sprite}#bin`}></use>
-                        </svg>
-                      </div>
-                    </td>
-                  );
-                }
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-              })}
-            </tr>
-          );
-        })}
       </tbody>
     </table>
   );

@@ -3,17 +3,33 @@ import { DropDown } from 'components/DropDown/DropDown';
 import css from './TabletForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTransaction } from 'redux/report/report-operations';
 
 export const TabletForm = ({ options }) => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
-
-  const handleSubmit = evt => {
-    evt.preventDefault();
-  };
+  const dispatch = useDispatch();
 
   const resetForm = () => {
     document.getElementById('productForm').reset();
     setSelectedDropValue(null);
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.target;
+    if (selectedDropValue) {
+      dispatch(
+        addTransaction({
+          dateTransaction: new Date(),
+          income: false,
+          sum: form.elements.price.value,
+          category: selectedDropValue,
+          description: form.elements.productName.value,
+        })
+      );
+      resetForm();
+    }
   };
 
   return (

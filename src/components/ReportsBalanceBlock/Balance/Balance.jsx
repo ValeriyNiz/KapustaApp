@@ -12,10 +12,6 @@ export default function Balance() {
   const balanceRedux = useSelector(getBalance);
   console.log('balanceRedux', balanceRedux);
 
-  useEffect(() => {
-    dispatch(fetchBalance());
-  }, [dispatch]);
-
   const [inputValue, setinputValue] = useState(0);
   const [isSent, setIsSent] = useState(false);
 
@@ -53,9 +49,9 @@ export default function Balance() {
           name="balance"
           // value={balValue}
           onChange={onChange}
-          placeholder="00.00 UAH"
+          placeholder={balanceRedux ?`${balanceRedux} UAH` : "00.00 UAH"}
         />
-        {!inputValue > 0 && (
+        {!balanceRedux > 0 && (
           <Tooltip>
             <p>
               Hello! To get started, enter the current balance of your account!

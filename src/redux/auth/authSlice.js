@@ -14,12 +14,12 @@ export const initialState = {
     balance: null,
   },
   accessToken: null,
-  refreshToken: null,
-  sid: null,
   isLogin: false,
+  isRefreshing: false,
   isLoading: false,
-  // error: null,
   message: '',
+  // refreshToken: null,
+  // sid: null,
 };
 
 const authSlice = createSlice({
@@ -29,52 +29,55 @@ const authSlice = createSlice({
   extraReducers: {
     [register.pending]: state => {
       state.isLoading = true;
+      state.message = '';
     },
     [register.fulfilled]: (state, { payload }) => {
       state.user.email = payload.user;
+      state.isLoading = false;
       state.message = 'Verify your email, please.';
+      // state.refreshToken = payload.refreshToken;
+      // state.sid = payload.sid;
     },
     [register.rejected]: (state, { payload }) => {
+      state.isLoading = false;
       state.isLogin = false;
       state.message = payload;
     },
     [logIn.pending]: state => {
       state.isLogin = false;
+      state.isLoading = true;
       state.message = '';
     },
     [logIn.fulfilled]: (state, { payload }) => {
-      // localStorage.setItem('auth', JSON.stringify(payload));
       state.accessToken = payload.token;
-      state.refreshToken = payload.refreshToken;
-      state.sid = payload.sid;
+      state.isLoading = false;
       state.isLogin = true;
     },
     [logIn.rejected]: (state, { payload }) => {
       state.isLogin = false;
+      state.isLoading = false;
       state.message = payload;
     },
-    [logOut.fulfilled]: state => ({
-      ...state,
-      accessToken: null,
-      refreshToken: null,
-      sid: null,
-      isLogin: false,
-    }),
-    [refresh.pending]: state => ({ ...state, isLogin: false }),
-    [refresh.fulfilled]: (state, { payload }) => ({
-      ...state,
-      accessToken: payload.newAccessToken,
-      refreshToken: payload.newRefreshToken,
-      sid: payload.newSid,
-      isLogin: true,
-    }),
-    [refresh.rejected]: state => ({
-      ...state,
-      isLogin: false,
-      accessToken: null,
-      refreshToken: null,
-      sid: null,
-    }),
+
+    [logOut.fulfilled]: state => {
+      state.user = { email: '', balance: null };
+      state.accessToken = null;
+      state.isLogin = false;
+      state.message = '';
+    },
+
+    [refresh.pending]: state => {
+      state.isRefreshing = true;
+    },
+    [refresh.fulfilled]: (state, { payload }) => {
+      state.user = payload;
+      state.isLogin = true;
+      state.isRefreshing = false;
+    },
+    [refresh.rejected]: state => {
+      state.isRefreshing = false;
+    },
+
     [googleAuth.fulfilled](state, action) {
       const { user, accessToken, refreshToken, sid } = action.payload;
       state.user = user;
@@ -83,9 +86,9 @@ const authSlice = createSlice({
       state.sid = sid;
       state.isLogin = true;
     },
+
     [setBalance.fulfilled]: (state, { payload }) => {
       state.user.balance = payload.newUserBalance;
-      state.isLoading = false;
     },
   },
 });

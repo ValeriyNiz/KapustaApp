@@ -5,11 +5,11 @@ export const fetchFullStatistics = createAsyncThunk(
   'report/fetchFullStatistics',
   async (params, rejectWithValue) => {
     try {
-      const { year, currentMonth} = params;
-      
-      const data = await API.post('http://localhost:3030/api/transaction/fullStatistics', {
+      const { year, currentMonth } = params;
+
+      const data = await API.post('/transaction/fullStatistics', {
         year,
-        currentMonth
+        currentMonth,
       });
       //console.log('data', data);
       return data;

@@ -10,7 +10,7 @@ export const initialState = {
   allTransactions: [],
   // choice: 'expenses',
   totalReportObject: null,
-  searchedMonth: 'February',
+  searchedMonth: 'March',
   searchedYear: 2023,
 };
 

@@ -7,9 +7,12 @@ import { TabletForm } from 'components/TabletForm/TabletForm';
 import { TabletTable } from 'components/TabletTable/TabletTable';
 import { ToTransaction } from 'components/ToTransaction/ToTransaction';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchTransactions } from 'redux/report/report-operations';
 import css from './ExpensesIncomes.module.css';
 
 export const ExpensesIncomes = () => {
+  const dispatch = useDispatch();
   const [choice, setChoice] = useState('expenses');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(
@@ -26,14 +29,9 @@ export const ExpensesIncomes = () => {
     return () => window.removeEventListener('resize', updateMedia);
   });
 
-  const data = [
-    {
-      name: 'Bonus',
-      date: '21.11.2019',
-      category: 'Add',
-      value: '800.00 UAH.',
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
 
   const options = [
     { value: 'transport', label: 'Transport' },
@@ -63,25 +61,25 @@ export const ExpensesIncomes = () => {
       {isMobile ? (
         <Background type="Secondary">
           <ToTransaction />
-          <ReportsBalanceBlock/>
-          <MobileTable data={data} choice={choice} />
+          <ReportsBalanceBlock />
+          <MobileTable choice={choice} />
           <ExpIncNav choice={choice} setChoice={setChoice} />
         </Background>
       ) : (
         <Background type="Secondary">
-            <div className={css.container}>
-              <ReportsBalanceBlock/>
+          <div className={css.container}>
+            <ReportsBalanceBlock />
             <ExpIncNav choice={choice} setChoice={setChoice} />
             <div className={css.section}>
               <TabletForm options={options} />
               {!isTablet ? (
                 <div className={css.bottomContainer}>
-                  <TabletTable data={data} choice={choice} />
+                  <TabletTable choice={choice} />
                   <SummaryTable sum={summary} />
                 </div>
               ) : (
                 <div className={css.tableContainer}>
-                  <TabletTable data={data} choice={choice} />
+                  <TabletTable choice={choice} />
                 </div>
               )}
             </div>

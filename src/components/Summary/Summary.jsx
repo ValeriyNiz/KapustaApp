@@ -31,7 +31,7 @@ export const Summary = () => {
     'December',
   ];
   const currentYear = 2023;
-  const currentMonth = 'February';
+  const currentMonth = 'March';
 
   const balance = useSelector(getBalance);
   const searchedYear = useSelector(getSearchedYear);

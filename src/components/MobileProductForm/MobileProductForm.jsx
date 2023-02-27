@@ -2,6 +2,7 @@ import { DropDown } from 'components/DropDown/DropDown';
 import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
@@ -13,6 +14,12 @@ export const MobileProductForm = () => {
   const resetForm = () => {
     document.getElementById('productForm').reset();
     setSelectedDropValue(null);
+  };
+
+  const navigate = useNavigate();
+
+  const prevPage = () => {
+    navigate(-1);
   };
 
   const options = [
@@ -32,9 +39,11 @@ export const MobileProductForm = () => {
   return (
     <>
       <div className={css.containerSVG}>
-        <svg width="18" height="12">
-          <use href={`${Sprite}#back-arrow`}></use>
-        </svg>
+        <button onClick={prevPage}>
+          <svg width="18" height="12">
+            <use href={`${Sprite}#back-arrow`}></use>
+          </svg>
+        </button>
       </div>
       <form onSubmit={handleSubmit} id="productForm">
         <div className={css.containerBG}>

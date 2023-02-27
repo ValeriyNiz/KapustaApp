@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBalance, setBalance } from 'redux/auth/auth-operations';
+import { setBalance } from 'redux/auth/auth-operations';
 import { getBalance } from 'redux/auth/auth-selector';
 
 import CurrencyInput from 'shared/CurrencyInput/CurrencyInput';
@@ -49,7 +49,7 @@ export default function Balance() {
           name="balance"
           // value={balValue}
           onChange={onChange}
-          placeholder={balanceRedux ?`${balanceRedux} UAH` : "00.00 UAH"}
+          placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />
         {!balanceRedux > 0 && (
           <Tooltip>

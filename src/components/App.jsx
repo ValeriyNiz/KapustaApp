@@ -10,8 +10,8 @@ import { getIsLogin, getIsRefreshing } from 'redux/auth/auth-selector';
 import { useEffect } from 'react';
 import { refresh } from 'redux/auth/auth-operations';
 import Loader from 'shared/Loader/Loader';
-import PrivateRoute from 'routes/PrivateRoute/PrivateRoute';
-import RestrictedRoute from 'routes/RestrictedRoute/RestrictedRoute';
+// import PrivateRoute from 'routes/PrivateRoute/PrivateRoute';
+// import RestrictedRoute from 'routes/RestrictedRoute/RestrictedRoute';
 
 export const App = () => {
   const dispatch = useDispatch();

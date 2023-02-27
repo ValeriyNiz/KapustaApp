@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API, authToken } from 'API';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const register = createAsyncThunk(
   'auth/register',

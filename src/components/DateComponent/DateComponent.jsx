@@ -1,20 +1,29 @@
 import css from './DateComponent.module.css';
 import Sprite from '../../images/sprite.svg';
+import ReactDatePicker from 'react-datepicker';
+import { forwardRef } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export const DateComponent = () => {
-  const current = new Date();
-
-  return (
-    <div className={css.dateDiv}>
+export const DateComponent = ({ date, setDate }) => {
+  const CalendarBtn = forwardRef(({ value, onClick }, ref) => (
+    <button onClick={onClick} ref={ref}>
       <svg width="20" height="20">
         <use href={`${Sprite}#calendar`}></use>
       </svg>
-      <p className={css.date}>{`${current
-        .getDate()
-        .toString()
-        .padStart(2, '0')}.${(current.getMonth() + 1)
-        .toString()
-        .padStart(2, '0')}.${current.getFullYear()}`}</p>
+      {value}
+    </button>
+  ));
+
+  return (
+    <div className={css.dateDiv}>
+      <ReactDatePicker
+        dateFormat="dd.MM.yyyy"
+        selected={date}
+        onChange={date => {
+          setDate(date);
+        }}
+        customInput={<CalendarBtn />}
+      />
     </div>
   );
 };

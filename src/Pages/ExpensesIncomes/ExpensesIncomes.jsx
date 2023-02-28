@@ -25,15 +25,6 @@ export const ExpensesIncomes = () => {
     return () => window.removeEventListener('resize', updateMedia);
   });
 
-  const summary = [
-    { month: 'November', sum: '10 000.00' },
-    { month: 'November', sum: '10 000.00' },
-    { month: 'November', sum: '10 000.00' },
-    { month: 'November', sum: '10 000.00' },
-    { month: 'November', sum: '10 000.00' },
-    { month: 'November', sum: '10 000.00' },
-  ];
-
   return (
     <>
       {isMobile ? (
@@ -53,7 +44,7 @@ export const ExpensesIncomes = () => {
               {!isTablet ? (
                 <div className={css.bottomContainer}>
                   <TabletTable />
-                  <SummaryTable sum={summary} />
+                  <SummaryTable />
                 </div>
               ) : (
                 <div className={css.tableContainer}>
@@ -62,7 +53,7 @@ export const ExpensesIncomes = () => {
               )}
             </div>
           </div>
-          {isTablet && <SummaryTable sum={summary} />}
+          {isTablet && <SummaryTable />}
         </Background>
       )}
     </>

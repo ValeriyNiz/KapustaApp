@@ -27,7 +27,8 @@ export const MobileProductForm = () => {
     if (selectedDropValue) {
       await dispatch(
         addTransaction({
-          dateTransaction: new Date(),
+          dateTransaction:
+            sessionStorage.getItem('transactionDate') || new Date(),
           income: isIncome,
           sum: form.elements.price.value,
           category: selectedDropValue.label,

@@ -7,7 +7,7 @@ import {
   deleteTransaction,
   fetchTransactions,
 } from 'redux/report/report-operations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 export const MobileTable = () => {
@@ -15,6 +15,7 @@ export const MobileTable = () => {
   const location = useLocation();
   const isIncome = location.search.includes('income');
   const dispatch = useDispatch();
+  const [date, setDate] = useState(new Date());
 
   let tableData = isIncome
     ? data.filter(({ income }) => income)
@@ -24,13 +25,22 @@ export const MobileTable = () => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
+  useEffect(() => {
+    sessionStorage.removeItem('transactionDate');
+  }, []);
+
   const handleDelete = (id, sum, income) => {
-    dispatch(deleteTransaction({id, sum, income}));
+    dispatch(deleteTransaction({ id, sum, income }));
+  };
+
+  const onDateChange = date => {
+    sessionStorage.setItem('transactionDate', date.toString());
+    setDate(date);
   };
 
   return (
     <>
-      <DateComponent />
+      <DateComponent date={date} setDate={onDateChange} />
       <ul>
         {tableData.map(t => (
           <li key={t._id}>

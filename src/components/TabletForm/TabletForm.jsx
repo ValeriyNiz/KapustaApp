@@ -10,7 +10,7 @@ import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { getError } from 'redux/report/report-selectors';
 // import { getChoice } from 'redux/report/report-selectors';
 
-export const TabletForm = ({ options }) => {
+export const TabletForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
   // const choice = useSelector(getChoice);
@@ -18,13 +18,36 @@ export const TabletForm = ({ options }) => {
   const error = useSelector(getError);
   const location = useLocation();
   const isIncome = location.search.includes('income');
+  let options = [];
+
+  if (!isIncome) {
+    options = [
+      { value: 'transport', label: 'Transport' },
+      { value: 'products', label: 'Products' },
+      { value: 'health', label: 'Health' },
+      { value: 'alcohol', label: 'Alcohol' },
+      { value: 'entertainment', label: 'Entertainment' },
+      { value: 'housing', label: 'Housing' },
+      { value: 'technique', label: 'Technique' },
+      { value: 'comm', label: 'Communal, communication' },
+      { value: 'sports', label: 'Sports, hobbies' },
+      { value: 'education', label: 'Education' },
+      { value: 'other', label: 'Other' },
+    ];
+  } else {
+    options = [
+      { value: 'salary', label: 'Salary' },
+      { value: 'income', label: 'Income' },
+      { value: 'other', label: 'Other' },
+    ];
+  }
 
   const resetForm = () => {
     document.getElementById('productForm').reset();
     setSelectedDropValue(null);
   };
 
-  const handleSubmit = async(evt) => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
     const form = evt.target;
     if (selectedDropValue) {
@@ -44,9 +67,11 @@ export const TabletForm = ({ options }) => {
 
   return (
     <>
-      {error && <ModalSimple active={isModalActive} setActive={setIsModalActive}>
-        {error}
-      </ModalSimple>}
+      {error && (
+        <ModalSimple active={isModalActive} setActive={setIsModalActive}>
+          {error}
+        </ModalSimple>
+      )}
       <form onSubmit={handleSubmit} className={css.form} id="productForm">
         <div className={css.bigFlex}>
           <DateComponent />

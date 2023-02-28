@@ -8,8 +8,15 @@
   line-height: 20px;
   text-align: left;
   position: absolute;
-  z-index: 99;
   top: 58px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 300ms opacity;
+}
+
+.tooltip__box.active {
+  opacity: 1;
+  pointer-events: all;
   z-index: 99;
 }
 
@@ -20,4 +27,13 @@
   border-width: 15px;
   border-style: solid;
   border-color: transparent transparent #142a58 transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: 300ms opacity;
+}
+
+.tooltip__arrow.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 97;
 }

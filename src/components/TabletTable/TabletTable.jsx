@@ -23,8 +23,8 @@ export const TabletTable = () => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const handleDelete = id => {
-    dispatch(deleteTransaction(id));
+  const handleDelete = (id, sum, income) => {
+    dispatch(deleteTransaction({id, sum, income}));
   };
 
   return (
@@ -52,7 +52,7 @@ export const TabletTable = () => {
                     {t.sum} UAH
                   </span>
                 )}
-                <button onClick={() => handleDelete(t._id)}>
+                <button onClick={() => handleDelete(t._id, t.sum, t.income)}>
                   <svg width="18" height="18" className={css.bin}>
                     <use href={`${Sprite}#bin`}></use>
                   </svg>

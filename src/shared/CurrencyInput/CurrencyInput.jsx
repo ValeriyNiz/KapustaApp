@@ -7,7 +7,7 @@ const defaultMaskOptions = {
   prefix: '',
   suffix: ' UAH',
   includeThousandsSeparator: true,
-  thousandsSeparatorSymbol: ' ',
+  thousandsSeparatorSymbol: '',
   allowDecimal: true,
   decimalSymbol: '.',
   decimalLimit: 2, // how many digits allowed after the decimal

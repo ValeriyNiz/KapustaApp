@@ -24,8 +24,8 @@ export const MobileTable = () => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const handleDelete = id => {
-    dispatch(deleteTransaction(id));
+  const handleDelete = (id, sum, income) => {
+    dispatch(deleteTransaction({id, sum, income}));
   };
 
   return (
@@ -51,7 +51,7 @@ export const MobileTable = () => {
                 width="18"
                 height="18"
                 className={css.bin}
-                onClick={() => handleDelete(t._id)}
+                onClick={() => handleDelete(t._id, t.sum, t.income)}
               >
                 <use href={`${Sprite}#bin`}></use>
               </svg>

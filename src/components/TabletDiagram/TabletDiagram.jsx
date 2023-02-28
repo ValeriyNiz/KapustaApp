@@ -59,15 +59,26 @@ export const TabletDiagram = () => {
       const { x, y, width, value } = props;
 
       return (
-        <text
-          x={x + width / 2}
-          y={y - 15}
-          fill="#000000"
-          textAnchor="middle"
-          dominantBaseline="central"
-        >
-          {`${value} UAH`}
-        </text>
+        <g>
+          <text
+            x={x + width / 2}
+            y={y - 30}
+            fill="#000000"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            {value}
+          </text>
+          <text
+            x={x + width / 2}
+            y={y - 15}
+            fill="#000000"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            UAH
+          </text>
+        </g>
       );
     };
   };

@@ -1,7 +1,7 @@
 .tableDiv {
   overflow: auto;
   overflow-x: hidden;
-  width: 624px;
+  width: 100%;
   max-height: 400px;
   margin-top: 48px;
 }
@@ -131,7 +131,7 @@ td {
 
 @media screen and (min-width: 1280px) {
   .tableDiv {
-    width: 746px;
+    width: 100%;
     margin-top: 60px;
   }
 }

@@ -13,14 +13,11 @@ export const TabletTable = () => {
   const data = useSelector(getAllTransactions);
   const location = useLocation();
   const isIncome = location.search.includes('income');
-  let tableData = null;
-  if (isIncome) {
-    tableData = data.filter(({ income }) => income);
-  } else {
-    tableData = data.filter(({ income }) => !income);
-  }
-
   const dispatch = useDispatch();
+
+  let tableData = isIncome
+    ? data.filter(({ income }) => income)
+    : data.filter(({ income }) => !income);
 
   useEffect(() => {
     dispatch(fetchTransactions());

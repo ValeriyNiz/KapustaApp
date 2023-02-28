@@ -22,12 +22,10 @@ export const addTransaction = createAsyncThunk(
   'report/addTransaction',
   async (inputData, { rejectWithValue }) => {
     try {
-      let res = null;
-      if (!inputData.income) {
-        res = await API.post('/transactions/expenses', inputData);
-      } else {
-        res = await API.post('/transactions/income', inputData);
-      }
+      const url = inputData.income
+        ? '/transactions/income'
+        : '/transactions/expenses';
+      const res = await API.post(url, inputData);
       return res;
     } catch (error) {
       return rejectWithValue(error.message);

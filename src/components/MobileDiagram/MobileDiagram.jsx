@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 
-import css from './Diagram.module.css';
+import css from './MobileDiagram.module.css';
 
 import { data } from './file';
 
@@ -10,12 +10,11 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   ResponsiveContainer,
   Cell,
 } from 'recharts';
 
-export const Diagram = () => {
+export const MobileDiagram = () => {
   const { income } = data;
   const { categories } = income;
 
@@ -29,7 +28,7 @@ export const Diagram = () => {
 
       return (
         <text
-          x={x + width + 50}
+          x={x + width + 40}
           y={y + 15}
           fill="#000000"
           textAnchor="middle"
@@ -44,10 +43,10 @@ export const Diagram = () => {
   const renderCustomizedLabelDescription = () => {
     return props => {
       const { x, y, width, value } = props;
-
+      console.log(props);
       return (
         <text
-          x={x + width / 8}
+          x={x + 30}
           y={y - 15}
           fill="#000000"
           textAnchor="middle"
@@ -61,48 +60,6 @@ export const Diagram = () => {
 
   return (
     <div className={css.container}>
-      {/* horizontal diagram */}
-      {/* <div className={css.wrapperBar}>
-        <ResponsiveContainer width="100%" aspect={2}>
-          <BarChart
-            className={css.barChart}
-            data={a}
-            layout={'horizontal'}
-            margin={{
-              top: 40,
-              right: 0,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="description"
-              axisLine={false}
-              tickLine={false}
-              padding={{ left: 20, right: 20 }}
-            />
-            <YAxis hide={true} tickCount={8} />
-
-            <Bar
-              dataKey="sum"
-              maxBarSize={60}
-              minPointSize={5}
-              radius={[10, 10, 0, 0]}
-            >
-              <LabelList dataKey="sum" content={renderCustomizedLabel()} />
-              {a.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={index % 3 === 0 ? '#FF751D' : '#FFDAC0'}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer> */}
-      {/* </div> */}
-
-      {/* vertikal diagram */}
       <div className={css.wrapperBarMobile}>
         <ResponsiveContainer minHeight={600} width="100%">
           <BarChart
@@ -117,7 +74,6 @@ export const Diagram = () => {
               axisLine={false}
               tickLine={false}
               hide
-              // tick={{ stroke: 'red', strokeWidth: 2 }}
             />
             <XAxis hide type="number" tickLine={false} />
             <Bar dataKey="sum" maxBarSize={30} radius={[0, 50, 50, 0]}>

@@ -6,7 +6,13 @@ import {
   getTotalReportObject,
   getSearchedMonth,
   getSearchedYear,
+  getSelectedCashflow,
 } from 'redux/report/report-selectors';
+
+import {
+  setSelectedCashflow,
+  setSelectedCategory,
+} from '../../redux/report/report-slice';
 
 import css from './Report.module.css';
 import Sprite from '../../images/currentPeriod.svg';
@@ -32,7 +38,7 @@ export const Report = () => {
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
   const totalReportObject = useSelector(getTotalReportObject);
-  const [activeStatus, setActiveStatus] = useState('Income');
+  const selectedCashflow = useSelector(getSelectedCashflow);
   const [categoriesArray, setCategoriesArray] = useState();
   useEffect(() => {
     dispatch(
@@ -59,29 +65,38 @@ export const Report = () => {
           (first, second) => first.sum - second.sum
         );
       }
+
       setCategoriesArray(
-        activeStatus === 'Expenses'
+        selectedCashflow === 'Expenses'
           ? expensesCategoriesSorted
           : incomCategoriesSorted
       );
     }
-  }, [activeStatus, totalReportObject]);
+  }, [selectedCashflow, totalReportObject]);
 
-  const onStatusChange = () => {
-    setActiveStatus(activeStatus === 'Expenses' ? 'Income' : 'Expenses');
+  const onCashflowChange = () => {
+    dispatch(
+      setSelectedCashflow(
+        selectedCashflow === 'Expenses' ? 'Income' : 'Expenses'
+      )
+    );
+  };
+
+  const onCategoryChange = category => {
+    dispatch(setSelectedCategory(category));
   };
 
   return (
     <div className={css.container}>
       <div className={css.wrapper}>
         <div className={css.titleContainer}>
-          <button type="button" onClick={onStatusChange}>
+          <button type="button" onClick={onCashflowChange}>
             <svg width={10} height={10} className={css.leftArrow}>
               <use href={`${Sprite}#icon-arrow-left`}></use>
             </svg>
           </button>
-          <p className={css.header}>{activeStatus}</p>
-          <button type="button" onClick={onStatusChange}>
+          <p className={css.header}>{selectedCashflow}</p>
+          <button type="button" onClick={onCashflowChange}>
             <svg width={10} height={10} className={css.leftArrow}>
               <use href={`${Sprite}#icon-arrow-right`}></use>
             </svg>
@@ -93,7 +108,11 @@ export const Report = () => {
           <ul className={css.list}>
             {categoriesArray &&
               categoriesArray.map(category => (
-                <li className={css.item} key={category.category}>
+                <li
+                  className={css.item}
+                  key={category.category}
+                  onClick={() => onCategoryChange(category.category)}
+                >
                   <p className={css.sum}>{category.sum}</p>
                   <div className={css.backGround}>
                     <svg className={css.icon} width={55} height={56}>

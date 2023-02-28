@@ -10,6 +10,8 @@ export const initialState = {
   totalReportObject: null,
   searchedMonth: 'March',
   searchedYear: 2023,
+  selectedCashflow: 'Income',
+  selectedCategory: '',
 };
 
 const reportSlice = createSlice({
@@ -21,6 +23,12 @@ const reportSlice = createSlice({
     },
     setSearchedYear: (state, action) => {
       state.searchedYear = action.payload;
+    },
+    setSelectedCashflow: (state, action) => {
+      state.selectedCashflow = action.payload;
+    },
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
     },
   },
   extraReducers: {
@@ -40,5 +48,10 @@ const reportSlice = createSlice({
     },
   },
 });
-export const { setSearchedMonth, setSearchedYear } = reportSlice.actions;
+export const {
+  setSearchedMonth,
+  setSearchedYear,
+  setSelectedCashflow,
+  setSelectedCategory,
+} = reportSlice.actions;
 export const reportReducer = reportSlice.reducer;

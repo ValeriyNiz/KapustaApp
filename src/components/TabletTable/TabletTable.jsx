@@ -15,7 +15,7 @@ export const TabletTable = () => {
   const isIncome = location.search.includes('income');
   const dispatch = useDispatch();
 
-  let tableData = isIncome
+  const tableData = isIncome
     ? data.filter(({ income }) => income)
     : data.filter(({ income }) => !income);
 

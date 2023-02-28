@@ -25,7 +25,7 @@ export const chooseIcon = category => {
     icon = `${Sprite}#icon-ufo`;
   } else if (category === 'Salary') {
     icon = `${Sprite}#icon-salary`;
-  } else if (category === 'Add. income') {
+  } else if (category === 'Income') {
     icon = `${Sprite}#icon-income`;
   }
   return icon;

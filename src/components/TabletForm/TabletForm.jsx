@@ -19,6 +19,7 @@ export const TabletForm = () => {
   const location = useLocation();
   const isIncome = location.search.includes('income');
   let options = [];
+  const [date, setDate] = useState(new Date());
 
   if (!isIncome) {
     options = [
@@ -53,7 +54,7 @@ export const TabletForm = () => {
     if (selectedDropValue) {
       await dispatch(
         addTransaction({
-          dateTransaction: new Date(),
+          dateTransaction: date,
           income: isIncome,
           sum: form.elements.price.value,
           category: selectedDropValue.label,
@@ -74,7 +75,7 @@ export const TabletForm = () => {
       )}
       <form onSubmit={handleSubmit} className={css.form} id="productForm">
         <div className={css.bigFlex}>
-          <DateComponent />
+          <DateComponent date={date} setDate={setDate} />
           <div className={css.formFlex}>
             <input
               type="text"

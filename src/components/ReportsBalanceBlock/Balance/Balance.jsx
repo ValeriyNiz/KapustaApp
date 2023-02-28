@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBalance } from 'redux/auth/auth-operations';
 import { getBalance } from 'redux/auth/auth-selector';
@@ -9,20 +9,20 @@ import css from './Balance.module.css';
 
 export default function Balance() {
   const dispatch = useDispatch();
-  
+
   const [inputValue, setInputValue] = useState(0);
   const balanceRedux = useSelector(getBalance);
   console.log('balanceRedux', balanceRedux);
-  
+
   const [isSent, setIsSent] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(true);
   console.log('inputValue ', inputValue);
-  
+
   // useEffect(() => {
   //   setInputValue(balanceRedux);
   // }, [balanceRedux]);
 
-  const handlerSubmit = async(e) => {
+  const handlerSubmit = async e => {
     e.preventDefault();
     await dispatch(setBalance({ balance: inputValue }));
     setIsSent(true);
@@ -48,7 +48,7 @@ export default function Balance() {
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />
-        {(!balanceRedux > 0 && inputValue === 0) && (
+        {!balanceRedux > 0 && inputValue === 0 && (
           <Tooltip active={isShowTooltip} setActive={setIsShowTooltip}>
             <p>
               Hello! To get started, enter the current balance of your account!

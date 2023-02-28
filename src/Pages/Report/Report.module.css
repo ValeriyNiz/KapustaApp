@@ -31,22 +31,22 @@ button {
   margin-left: 20px;
 }
 @media screen and (max-width: 767.9px) {
-    .container {
-      margin: 0 auto;
-      max-width: 767px;
-      padding: 0 20px;
-    }
-   .list{
-    background-image: repeating-linear-gradient(
-    to top,
-    #000,
-    #000 1px,
-    transparent 1px,
-    transparent 135px
-  );
-  gap:40px 13px;
-   }
+  .container {
+    margin: 0 auto;
+    max-width: 767px;
+    padding: 0 20px;
   }
+  .list {
+    background-image: repeating-linear-gradient(
+      to top,
+      #000,
+      #000 1px,
+      transparent 1px,
+      transparent 135px
+    );
+    gap: 40px 13px;
+  }
+}
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1280px;
@@ -57,8 +57,8 @@ button {
     width: 704px;
     padding: 20px 40px;
   }
-  .list{
-    gap:40px 32px;
+  .list {
+    gap: 40px 32px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -71,10 +71,9 @@ button {
     padding: 20px 198px;
     width: 1034px;
   }
-  .list{
-    gap:40px 20px;
+  .list {
+    gap: 40px 20px;
   }
-
 }
 .sum {
   font-weight: 400;
@@ -88,7 +87,7 @@ button {
 
   color: #52555f;
 }
-.item:hover .icon{
+.item:hover .icon {
   fill: #ff751d;
 }
 .category {
@@ -125,18 +124,18 @@ button {
 .con {
   margin-bottom: 5px;
 }
-.backGround{
-  background: #F5F6FB;
-border-radius: 20px;
-width: 59px;
-height: 60px;
+.backGround {
+  background: #f5f6fb;
+  border-radius: 20px;
+  width: 59px;
+  height: 60px;
 }
-.item:hover .backGround{
-    background-color: #FFDAC0;;
+.item:hover .backGround {
+  background-color: #ffdac0;
 }
-.empty{
+.empty {
   text-align: center;
   font-size: 30px;
   margin-top: 50px;
- text-decoration:underline;
+  text-decoration: underline;
 }

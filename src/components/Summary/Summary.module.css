@@ -68,6 +68,8 @@
   line-height: 14px;
   text-align: center;
   letter-spacing: 0.02em;
+  user-select: none;
+  cursor: default;
 }
 
 .currentTitle {

@@ -25,7 +25,11 @@ export const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-
+  reducers: {
+    changeBalance(state, { payload }) {
+      state.user.balance = payload;
+    },
+  },
   extraReducers: {
     [register.pending]: state => {
       state.isLoading = true;
@@ -95,3 +99,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { changeBalance } = authSlice.actions;

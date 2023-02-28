@@ -3,14 +3,18 @@ import css from './MobileProductForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
+import ModalSimple from 'shared/ModalSimple/ModalSimple';
+import { getError } from 'redux/report/report-selectors';
 // import { getChoice } from 'redux/report/report-selectors';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
+  const [isModalActive, setIsModalActive] = useState(false);
   // const choice = useSelector(getChoice);
   const dispatch = useDispatch();
+  const error = useSelector(getError);
   const location = useLocation();
   const isIncome = location.search.includes('income');
 
@@ -19,11 +23,11 @@ export const MobileProductForm = () => {
     setSelectedDropValue(null);
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
     const form = evt.target;
     if (selectedDropValue) {
-      dispatch(
+      await dispatch(
         addTransaction({
           dateTransaction: new Date(),
           income: isIncome,
@@ -33,6 +37,7 @@ export const MobileProductForm = () => {
         })
       );
       resetForm();
+      setIsModalActive(true);
     }
   };
 
@@ -58,6 +63,11 @@ export const MobileProductForm = () => {
 
   return (
     <>
+      {error && (
+        <ModalSimple active={isModalActive} setActive={setIsModalActive}>
+          {error}
+        </ModalSimple>
+      )}
       <div className={css.containerSVG}>
         <button onClick={prevPage}>
           <svg width="18" height="12">

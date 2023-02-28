@@ -3,15 +3,19 @@ import { DropDown } from 'components/DropDown/DropDown';
 import css from './TabletForm.module.css';
 import Sprite from '../../images/sprite.svg';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
 import { useLocation } from 'react-router';
+import ModalSimple from 'shared/ModalSimple/ModalSimple';
+import { getError } from 'redux/report/report-selectors';
 // import { getChoice } from 'redux/report/report-selectors';
 
 export const TabletForm = ({ options }) => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
+  const [isModalActive, setIsModalActive] = useState(false);
   // const choice = useSelector(getChoice);
   const dispatch = useDispatch();
+  const error = useSelector(getError);
   const location = useLocation();
   const isIncome = location.search.includes('income');
 
@@ -20,11 +24,11 @@ export const TabletForm = ({ options }) => {
     setSelectedDropValue(null);
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = async(evt) => {
     evt.preventDefault();
     const form = evt.target;
     if (selectedDropValue) {
-      dispatch(
+      await dispatch(
         addTransaction({
           dateTransaction: new Date(),
           income: isIncome,
@@ -34,50 +38,56 @@ export const TabletForm = ({ options }) => {
         })
       );
       resetForm();
+      setIsModalActive(true);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={css.form} id="productForm">
-      <div className={css.bigFlex}>
-        <DateComponent />
-        <div className={css.formFlex}>
-          <input
-            type="text"
-            name="productName"
-            placeholder="Product description"
-            className={css.inputName}
-          />
-          <DropDown
-            options={options}
-            selectedDropValue={selectedDropValue}
-            setSelectedDropValue={setSelectedDropValue}
-          />
-          <div className={css.priceDiv}>
+    <>
+      {error && <ModalSimple active={isModalActive} setActive={setIsModalActive}>
+        {error}
+      </ModalSimple>}
+      <form onSubmit={handleSubmit} className={css.form} id="productForm">
+        <div className={css.bigFlex}>
+          <DateComponent />
+          <div className={css.formFlex}>
             <input
               type="text"
-              name="price"
-              placeholder="00.00"
-              className={css.price}
+              name="productName"
+              placeholder="Product description"
+              className={css.inputName}
             />
-            <svg width="20" height="20" className={css.calculator}>
-              <use href={`${Sprite}#calculator`}></use>
-            </svg>
+            <DropDown
+              options={options}
+              selectedDropValue={selectedDropValue}
+              setSelectedDropValue={setSelectedDropValue}
+            />
+            <div className={css.priceDiv}>
+              <input
+                type="text"
+                name="price"
+                placeholder="00.00"
+                className={css.price}
+              />
+              <svg width="20" height="20" className={css.calculator}>
+                <use href={`${Sprite}#calculator`}></use>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={css.buttonsDiv}>
-        <button type="submit" className={`${css.button} ${css.submit}`}>
-          Input
-        </button>
-        <button
-          type="button"
-          className={`${css.button} ${css.clear}`}
-          onClick={() => resetForm()}
-        >
-          Clear
-        </button>
-      </div>
-    </form>
+        <div className={css.buttonsDiv}>
+          <button type="submit" className={`${css.button} ${css.submit}`}>
+            Input
+          </button>
+          <button
+            type="button"
+            className={`${css.button} ${css.clear}`}
+            onClick={() => resetForm()}
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+    </>
   );
 };

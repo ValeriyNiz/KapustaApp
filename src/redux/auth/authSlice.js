@@ -13,13 +13,12 @@ export const initialState = {
     email: '',
     balance: null,
   },
+  isLoginApiDone: false,
   accessToken: null,
   isLogin: false,
   isRefreshing: false,
   isLoading: false,
   message: '',
-  // refreshToken: null,
-  // sid: null,
 };
 
 const authSlice = createSlice({
@@ -39,8 +38,6 @@ const authSlice = createSlice({
       state.user.email = payload.user;
       state.isLoading = false;
       state.message = 'Verify your email, please.';
-      // state.refreshToken = payload.refreshToken;
-      // state.sid = payload.sid;
     },
     [register.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -54,11 +51,13 @@ const authSlice = createSlice({
     },
     [logIn.fulfilled]: (state, { payload }) => {
       state.user = { email: payload.email, balance: payload.balance };
+      state.isLoginApiDone = true;
       state.accessToken = payload.token;
       state.isLoading = false;
       state.isLogin = true;
     },
     [logIn.rejected]: (state, { payload }) => {
+      state.isLoginApiDone = true;
       state.isLogin = false;
       state.isLoading = false;
       state.message = payload;
@@ -75,11 +74,13 @@ const authSlice = createSlice({
       state.isRefreshing = true;
     },
     [refresh.fulfilled]: (state, { payload }) => {
+      state.isLoginApiDone = true;
       state.user = payload;
       state.isLogin = true;
       state.isRefreshing = false;
     },
     [refresh.rejected]: state => {
+      state.isLoginApiDone = true;
       state.isRefreshing = false;
     },
 

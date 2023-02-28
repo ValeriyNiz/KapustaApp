@@ -1,8 +1,8 @@
 import Background from 'components/Background/Background';
-import styles from '../HomePage/HomePage.module.css';
+import styles from '../AuthPage/AuthPage.module.css';
 import AuthForm from 'components/AuthForm/AuthForm';
 
-const HomePage = () => {
+const AuthPage = () => {
   return (
     <Background type="Primary">
       <div className={styles.container}>
@@ -14,4 +14,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AuthPage;

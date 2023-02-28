@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 export const TabletTable = () => {
-  // const choice = useSelector(getChoice);
   const data = useSelector(getAllTransactions);
   const location = useLocation();
   const isIncome = location.search.includes('income');

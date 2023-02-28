@@ -13,6 +13,7 @@ export default function Balance() {
   const [inputValue, setInputValue] = useState(0);
   const balanceRedux = useSelector(getBalance);
   console.log('balanceRedux', balanceRedux);
+  
   const [isSent, setIsSent] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(true);
   console.log('inputValue ', inputValue);
@@ -23,19 +24,9 @@ export default function Balance() {
 
   const handlerSubmit = async(e) => {
     e.preventDefault();
-    // const inputBalance = +e.target.elements.balance.value
-    //   .split(' ')
-    //   .join('')
-    //   .slice(0, -3);
-
-    // if (inputBalance > 0) {
-    // console.log('inputValue ', inputValue);
     await dispatch(setBalance({ balance: inputValue }));
     setIsSent(true);
     // setInputValue(0);
-    // }
-
-    return;
   };
 
   const onChange = e => {
@@ -54,7 +45,6 @@ export default function Balance() {
         <CurrencyInput
           type="text"
           name="balance"
-          // value={balValue}
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />

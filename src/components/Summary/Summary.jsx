@@ -1,6 +1,5 @@
 import Sprite from '../../images/currentPeriod.svg';
 import css from '../../components/Summary/Summary.module.css';
-// import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getSearchedMonth,

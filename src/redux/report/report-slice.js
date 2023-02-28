@@ -5,6 +5,7 @@ import {
   addTransaction,
   deleteTransaction,
 } from './report-operations';
+
 export const initialState = {
   allTransactions: [],
   totalReportObject: null,
@@ -12,6 +13,7 @@ export const initialState = {
   searchedYear: 2023,
   selectedCashflow: 'Income',
   selectedCategory: '',
+  error: null,
 };
 
 const reportSlice = createSlice({
@@ -39,7 +41,12 @@ const reportSlice = createSlice({
       state.allTransactions = action.payload.data;
     },
     [addTransaction.fulfilled](state, action) {
+      state.error = null;
       state.allTransactions.push(action.payload.data);
+    },
+    [addTransaction.rejected](state, action) {
+      console.log('not allowed transaction');
+      state.error = action.payload;
     },
     [deleteTransaction.fulfilled](state, action) {
       state.allTransactions = state.allTransactions.filter(

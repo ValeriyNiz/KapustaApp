@@ -1,14 +1,14 @@
 import css from './MobileTable.module.css';
 import Sprite from '../../images/sprite.svg';
 import { DateComponent } from 'components/DateComponent/DateComponent';
-import { getAllTransactions } from 'redux/report/report-selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllTransactions } from 'redux/report/report-selectors';
 import {
   deleteTransaction,
   fetchTransactions,
 } from 'redux/report/report-operations';
-import { useLocation } from 'react-router';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 
 export const MobileTable = () => {
   const data = useSelector(getAllTransactions);
@@ -16,19 +16,16 @@ export const MobileTable = () => {
   const isIncome = location.search.includes('income');
   const dispatch = useDispatch();
 
-  let tableData = null;
-  if (isIncome) {
-    tableData = data.filter(({ income }) => income);
-  } else {
-    tableData = data.filter(({ income }) => !income);
-  }
+  let tableData = isIncome
+    ? data.filter(({ income }) => income)
+    : data.filter(({ income }) => !income);
 
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const handleDelete = id => {
-    dispatch(deleteTransaction(id));
+  const handleDelete = (id, sum, income) => {
+    dispatch(deleteTransaction({id, sum, income}));
   };
 
   return (
@@ -54,7 +51,7 @@ export const MobileTable = () => {
                 width="18"
                 height="18"
                 className={css.bin}
-                onClick={() => handleDelete(t._id)}
+                onClick={() => handleDelete(t._id, t.sum, t.income)}
               >
                 <use href={`${Sprite}#bin`}></use>
               </svg>

@@ -87,7 +87,8 @@ export default function Modal({ action, active, setActive, children }) {
 }
 
 Modal.propTypes = {
+  action: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   setActive: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };

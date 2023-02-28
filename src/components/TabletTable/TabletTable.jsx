@@ -13,21 +13,18 @@ export const TabletTable = () => {
   const data = useSelector(getAllTransactions);
   const location = useLocation();
   const isIncome = location.search.includes('income');
-  let tableData = null;
-  if (isIncome) {
-    tableData = data.filter(({ income }) => income);
-  } else {
-    tableData = data.filter(({ income }) => !income);
-  }
-
   const dispatch = useDispatch();
+
+  let tableData = isIncome
+    ? data.filter(({ income }) => income)
+    : data.filter(({ income }) => !income);
 
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
-  const handleDelete = id => {
-    dispatch(deleteTransaction(id));
+  const handleDelete = (id, sum, income) => {
+    dispatch(deleteTransaction({id, sum, income}));
   };
 
   return (
@@ -55,7 +52,7 @@ export const TabletTable = () => {
                     {t.sum} UAH
                   </span>
                 )}
-                <button onClick={() => handleDelete(t._id)}>
+                <button onClick={() => handleDelete(t._id, t.sum, t.income)}>
                   <svg width="18" height="18" className={css.bin}>
                     <use href={`${Sprite}#bin`}></use>
                   </svg>

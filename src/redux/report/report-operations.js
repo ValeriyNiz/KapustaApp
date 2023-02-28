@@ -1,5 +1,6 @@
 import { API } from 'API';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setBalance } from 'redux/auth/auth-operations';
 
 export const fetchFullStatistics = createAsyncThunk(
   'report/fetchFullStatistics',
@@ -20,14 +21,23 @@ export const fetchFullStatistics = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   'report/addTransaction',
-  async (inputData, { rejectWithValue }) => {
+  async (inputData, { rejectWithValue, getState, dispatch }) => {
+    const { income, sum } = inputData;
+    const balance = +getState().auth.user.balance;
+
+    const updatedBalance = income ? balance + +sum : balance - sum;
+
+    if (updatedBalance < 0) {
+      return rejectWithValue("You don't have enough money");
+    }
+
+    dispatch(setBalance({ balance: updatedBalance }));
+
     try {
-      let res = null;
-      if (!inputData.income) {
-        res = await API.post('/transactions/expenses', inputData);
-      } else {
-        res = await API.post('/transactions/income', inputData);
-      }
+      const url = inputData.income
+        ? '/transactions/income'
+        : '/transactions/expenses';
+      const res = await API.post(url, inputData);
       return res;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,9 +48,13 @@ export const addTransaction = createAsyncThunk(
 export const deleteTransaction = createAsyncThunk(
   'report/deleteTransaction',
 
-  async (id, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue, getState, dispatch }) => {
+    const { id, sum, income } = credentials;
+    const balance = +getState().auth.user.balance;
     try {
       await API.delete(`/transactions/${id}`);
+      const updatedBalance = income ? balance - sum : balance + sum;
+      dispatch(setBalance({ balance: updatedBalance }));
       return id;
     } catch (error) {
       return rejectWithValue(error.message);

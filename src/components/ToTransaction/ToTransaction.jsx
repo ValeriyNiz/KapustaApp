@@ -1,12 +1,13 @@
 import css from './ToTransaction.module.css';
 import Sprite from '../../images/sprite.svg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const ToTransaction = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const goToExpensesPage = () => {
-    navigate('mobile-product-form');
+    navigate(`mobile-product-form${location.search}`);
   };
 
   return (

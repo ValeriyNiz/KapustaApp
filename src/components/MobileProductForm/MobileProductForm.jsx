@@ -7,12 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from 'redux/report/report-operations';
 import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { getError } from 'redux/report/report-selectors';
-// import { getChoice } from 'redux/report/report-selectors';
 
 export const MobileProductForm = () => {
   const [selectedDropValue, setSelectedDropValue] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
-  // const choice = useSelector(getChoice);
   const dispatch = useDispatch();
   const error = useSelector(getError);
   const location = useLocation();
@@ -47,11 +45,25 @@ export const MobileProductForm = () => {
     navigate(-1);
   };
 
-  const options = [
-    { value: 'salary', label: 'Salary' },
-    { value: 'income', label: 'Income' },
-    { value: 'other', label: 'Other' },
-  ];
+  const options = isIncome
+    ? [
+        { value: 'salary', label: 'Salary' },
+        { value: 'income', label: 'Income' },
+        { value: 'other', label: 'Other' },
+      ]
+    : [
+        { value: 'transport', label: 'Transport' },
+        { value: 'products', label: 'Products' },
+        { value: 'health', label: 'Health' },
+        { value: 'alcohol', label: 'Alcohol' },
+        { value: 'entertainment', label: 'Entertainment' },
+        { value: 'housing', label: 'Housing' },
+        { value: 'technique', label: 'Technique' },
+        { value: 'comm', label: 'Communal, communication' },
+        { value: 'sports', label: 'Sports, hobbies' },
+        { value: 'education', label: 'Education' },
+        { value: 'other', label: 'Other' },
+      ];
 
   return (
     <>

@@ -48,16 +48,8 @@ export const MobileProductForm = () => {
   };
 
   const options = [
-    { value: 'transport', label: 'Transport' },
-    { value: 'products', label: 'Products' },
-    { value: 'health', label: 'Health' },
-    { value: 'alcohol', label: 'Alcohol' },
-    { value: 'entertainment', label: 'Entertainment' },
-    { value: 'housing', label: 'Housing' },
-    { value: 'technique', label: 'Technique' },
-    { value: 'comm', label: 'Communal, communication' },
-    { value: 'sports', label: 'Sports, hobbies' },
-    { value: 'education', label: 'Education' },
+    { value: 'salary', label: 'Salary' },
+    { value: 'income', label: 'Income' },
     { value: 'other', label: 'Other' },
   ];
 

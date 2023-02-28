@@ -1,14 +1,44 @@
-table {
-  max-width: 746px;
-  overflow-y: scroll;
-  width: 100%;
+.tableDiv {
+  overflow: auto;
+  width: 624px;
+  max-height: 400px;
   margin-top: 48px;
+}
+
+.tableDiv thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
 th,
 td {
   height: 40px;
   padding-left: 20px;
+}
+
+table thead th:first-child::before,
+table thead th:last-child::after {
+  width: 2px;
+  height: 11px;
+  background: white;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+}
+
+table thead th:first-child::before {
+  left: -1px;
+}
+
+table thead th:last-child::after {
+  right: -1px;
 }
 
 tbody tr td {
@@ -99,7 +129,8 @@ td {
 }
 
 @media screen and (min-width: 1280px) {
-  table {
+  .tableDiv {
+    width: 746px;
     margin-top: 60px;
   }
 }

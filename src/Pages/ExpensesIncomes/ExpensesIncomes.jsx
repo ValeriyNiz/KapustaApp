@@ -25,20 +25,6 @@ export const ExpensesIncomes = () => {
     return () => window.removeEventListener('resize', updateMedia);
   });
 
-  const options = [
-    { value: 'transport', label: 'Transport' },
-    { value: 'products', label: 'Products' },
-    { value: 'health', label: 'Health' },
-    { value: 'alcohol', label: 'Alcohol' },
-    { value: 'entertainment', label: 'Entertainment' },
-    { value: 'housing', label: 'Housing' },
-    { value: 'technique', label: 'Technique' },
-    { value: 'comm', label: 'Communal, communication' },
-    { value: 'sports', label: 'Sports, hobbies' },
-    { value: 'education', label: 'Education' },
-    { value: 'other', label: 'Other' },
-  ];
-
   const summary = [
     { month: 'November', sum: '10 000.00' },
     { month: 'November', sum: '10 000.00' },
@@ -63,7 +49,7 @@ export const ExpensesIncomes = () => {
             <ReportsBalanceBlock />
             <ExpIncNav />
             <div className={css.section}>
-              <TabletForm options={options} />
+              <TabletForm />
               {!isTablet ? (
                 <div className={css.bottomContainer}>
                   <TabletTable />

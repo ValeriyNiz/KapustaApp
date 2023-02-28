@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/ValeriyNiz/KapustaApp/static/css/main.0f5c468c.css",
-    "main.js": "/ValeriyNiz/KapustaApp/static/js/main.e6ab5de7.js",
-    "static/media/currentPeriod.svg": "/ValeriyNiz/KapustaApp/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
-    "static/media/kapusta.png": "/ValeriyNiz/KapustaApp/static/media/kapusta.fc652d90e4ffce32f155.png",
-    "static/media/kapusta_main.png": "/ValeriyNiz/KapustaApp/static/media/kapusta_main.6150a566c2556f581eaa.png",
-    "static/media/sprite.svg": "/ValeriyNiz/KapustaApp/static/media/sprite.7188a90b1c3575b7295bed5dd987b504.svg",
-    "static/media/google.svg": "/ValeriyNiz/KapustaApp/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
-    "index.html": "/ValeriyNiz/KapustaApp/index.html",
-    "main.0f5c468c.css.map": "/ValeriyNiz/KapustaApp/static/css/main.0f5c468c.css.map",
-    "main.e6ab5de7.js.map": "/ValeriyNiz/KapustaApp/static/js/main.e6ab5de7.js.map"
+    "main.css": "/KapustaApp/static/css/main.a6babfee.css",
+    "main.js": "/KapustaApp/static/js/main.20e31397.js",
+    "static/media/currentPeriod.svg": "/KapustaApp/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
+    "static/media/kapusta.png": "/KapustaApp/static/media/kapusta.fc652d90e4ffce32f155.png",
+    "static/media/kapusta_main.png": "/KapustaApp/static/media/kapusta_main.6150a566c2556f581eaa.png",
+    "static/media/sprite.svg": "/KapustaApp/static/media/sprite.7188a90b1c3575b7295bed5dd987b504.svg",
+    "static/media/google.svg": "/KapustaApp/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
+    "index.html": "/KapustaApp/index.html",
+    "main.a6babfee.css.map": "/KapustaApp/static/css/main.a6babfee.css.map",
+    "main.20e31397.js.map": "/KapustaApp/static/js/main.20e31397.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f5c468c.css",
-    "static/js/main.e6ab5de7.js"
+    "static/css/main.a6babfee.css",
+    "static/js/main.20e31397.js"
   ]
 }

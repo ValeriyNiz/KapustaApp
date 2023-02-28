@@ -9,13 +9,9 @@ import Background from 'components/Background/Background';
 
 export const CurrentPeriod = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isTablet, setIsTablet] = useState(
-    window.innerWidth >= 768 && window.innerWidth < 1280
-  );
 
   const updateMedia = () => {
     setIsMobile(window.innerWidth < 768);
-    setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1280);
   };
 
   useEffect(() => {

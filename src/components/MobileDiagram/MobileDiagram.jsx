@@ -1,8 +1,12 @@
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  getTotalReportObject,
+  getSelectedCashflow,
+  getSelectedCategory,
+} from 'redux/report/report-selectors';
 
 import css from './MobileDiagram.module.css';
-
-import { data } from './file';
 
 import {
   BarChart,
@@ -15,12 +19,45 @@ import {
 } from 'recharts';
 
 export const MobileDiagram = () => {
-  const { income } = data;
-  const { categories } = income;
+  const totalReportObject = useSelector(getTotalReportObject);
+  const selectedCashflow = useSelector(getSelectedCashflow);
+  const selectedCategory = useSelector(getSelectedCategory);
 
-  const a = categories
-    .find(item => item.category === 'Products')
-    .descriptions.sort((item1, item2) => item2.sum - item1.sum);
+  const [descriptions, setDescriptions] = useState([]);
+
+  useEffect(() => {
+    if (!totalReportObject) {
+      setDescriptions([]);
+      return;
+    }
+
+    const data =
+      selectedCashflow === 'Expenses'
+        ? totalReportObject.expenses
+        : totalReportObject.income;
+    if (!data || !data.categories) {
+      setDescriptions([]);
+      return;
+    }
+
+    const category = data.categories.find(
+      item => item.category === selectedCategory
+    );
+    if (!category || !category.descriptions) {
+      setDescriptions([]);
+      return;
+    }
+
+    setDescriptions(
+      [...category.descriptions].sort((item1, item2) => item2.sum - item1.sum)
+    );
+  }, [selectedCashflow, selectedCategory, totalReportObject]);
+  // const { income } = data;
+  // const { categories } = income;
+
+  // const a = categories
+  //   .find(item => item.category === 'Products')
+  //   .descriptions.sort((item1, item2) => item2.sum - item1.sum);
 
   const renderCustomizedLabelSum = () => {
     return props => {
@@ -42,16 +79,10 @@ export const MobileDiagram = () => {
 
   const renderCustomizedLabelDescription = () => {
     return props => {
-      const { x, y, width, value } = props;
+      const { x, y, value } = props;
       console.log(props);
       return (
-        <text
-          x={x + 30}
-          y={y - 15}
-          fill="#000000"
-          textAnchor="middle"
-          dominantBaseline="central"
-        >
+        <text x={x} y={y - 15} fill="#000000">
           {value}
         </text>
       );
@@ -59,41 +90,48 @@ export const MobileDiagram = () => {
   };
 
   return (
-    <div className={css.container}>
-      <div className={css.wrapperBarMobile}>
-        <ResponsiveContainer minHeight={600} width="100%">
-          <BarChart
-            className={css.barChart}
-            data={a}
-            layout="vertical"
-            margin={{ top: 40, right: 0, left: 0, bottom: 0 }}
-          >
-            <YAxis
-              dataKey="description"
-              type="category"
-              axisLine={false}
-              tickLine={false}
-              hide
-            />
-            <XAxis hide type="number" tickLine={false} />
-            <Bar dataKey="sum" maxBarSize={30} radius={[0, 50, 50, 0]}>
-              {/* // isAnimationActive={false} */}
-              <LabelList dataKey="sum" content={renderCustomizedLabelSum()} />
-              <LabelList
-                dataKey="description"
-                content={renderCustomizedLabelDescription()}
-              />
-
-              {a.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={index % 3 === 0 ? '#FF751D' : '#FFDAC0'}
+    <>
+      {descriptions.length > 0 && (
+        <div className={css.container}>
+          <div className={css.wrapperBarMobile}>
+            <ResponsiveContainer minHeight={600} width="100%">
+              <BarChart
+                className={css.barChart}
+                data={descriptions}
+                layout="vertical"
+                margin={{ top: 0, right: 100, left: 20, bottom: 0 }}
+              >
+                <YAxis
+                  dataKey="description"
+                  type="category"
+                  axisLine={false}
+                  tickLine={false}
+                  hide
                 />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+                <XAxis hide type="number" tickLine={false} />
+                <Bar dataKey="sum" maxBarSize={30} radius={[0, 50, 50, 0]}>
+                  {/* // isAnimationActive={false} */}
+                  <LabelList
+                    dataKey="sum"
+                    content={renderCustomizedLabelSum()}
+                  />
+                  <LabelList
+                    dataKey="description"
+                    content={renderCustomizedLabelDescription()}
+                  />
+
+                  {descriptions.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index % 3 === 0 ? '#FF751D' : '#FFDAC0'}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

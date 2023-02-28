@@ -52,12 +52,6 @@ export const MobileDiagram = () => {
       [...category.descriptions].sort((item1, item2) => item2.sum - item1.sum)
     );
   }, [selectedCashflow, selectedCategory, totalReportObject]);
-  // const { income } = data;
-  // const { categories } = income;
-
-  // const a = categories
-  //   .find(item => item.category === 'Products')
-  //   .descriptions.sort((item1, item2) => item2.sum - item1.sum);
 
   const renderCustomizedLabelSum = () => {
     return props => {
@@ -82,7 +76,7 @@ export const MobileDiagram = () => {
       const { x, y, value } = props;
       console.log(props);
       return (
-        <text x={x} y={y - 15} fill="#000000">
+        <text x={x} y={y - 5} fill="#000000">
           {value}
         </text>
       );
@@ -93,13 +87,13 @@ export const MobileDiagram = () => {
     <>
       {descriptions.length > 0 && (
         <div className={css.container}>
-          <div className={css.wrapperBarMobile}>
+          <div className={css.wrapperBar}>
             <ResponsiveContainer minHeight={600} width="100%">
               <BarChart
                 className={css.barChart}
                 data={descriptions}
                 layout="vertical"
-                margin={{ top: 0, right: 100, left: 20, bottom: 0 }}
+                margin={{ top: 20, right: 100, left: 20, bottom: 0 }}
               >
                 <YAxis
                   dataKey="description"

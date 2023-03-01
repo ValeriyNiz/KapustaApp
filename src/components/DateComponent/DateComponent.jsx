@@ -17,7 +17,7 @@ export const DateComponent = ({ date, setDate }) => {
   return (
     <div className={css.dateDiv}>
       <ReactDatePicker
-        dateFormat="dd.MM.yyyy"
+        dateFormat="yyyy.MM.dd"
         selected={date}
         onChange={date => {
           setDate(date);

@@ -32,7 +32,9 @@ export const TabletDiagram = () => {
         selectedCashflow === 'Expenses'
           ? totalReportObject.expenses
           : totalReportObject.income;
-      dispatch(setSelectedCategory(data.categories[0].category));
+      if (data.categoriesArray) {
+        dispatch(setSelectedCategory(data.categories[0].category));
+      }
     }
   }, [dispatch, totalReportObject, selectedCashflow]);
 

@@ -6,8 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export const DateComponent = ({ date, setDate }) => {
   const CalendarBtn = forwardRef(({ value, onClick }, ref) => (
-    <button onClick={onClick} ref={ref}>
-      <svg width="20" height="20">
+    <button onClick={onClick} ref={ref} className={css.datebutton}>
+      <svg className={css.dateicon}>
         <use href={`${Sprite}#calendar`}></use>
       </svg>
       {value}
@@ -15,7 +15,7 @@ export const DateComponent = ({ date, setDate }) => {
   ));
 
   return (
-    <div className={css.dateDiv}>
+    <div className={css.dateWrapper}>
       <ReactDatePicker
         dateFormat="dd.MM.yyyy"
         selected={date}

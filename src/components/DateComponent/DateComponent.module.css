@@ -1,32 +1,47 @@
-.date {
+.datebutton {
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #52555f;
+
   font-family: 'Roboto';
   font-weight: 900;
   font-size: 12px;
   line-height: 1.17;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-
-  color: #52555f;
-
-  margin-left: 8px;
 }
 
-.dateDiv {
-  background-color: #f5f6fb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom-left-radius: 120px;
-  height: 120px;
-  margin-bottom: 12px;
+.dateicon {
+  width: 28px;
+  height: 24px;
+
+  padding-right: 8px;
+}
+
+.dateWrapper {
+  /* background-color: #f5f6fb; */
+
+  /* background-color: green; */
+
+  padding-top: 38px;
+  padding-bottom: 38px;
+  /* height: 120px; */
+
   z-index: 2;
 }
 
 @media screen and (min-width: 768px) {
-  .dateDiv {
-    border-radius: 0;
-    margin-bottom: 0;
-    background-color: white;
-    height: 40px;
+  .dateWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 0; */
+    /* margin-left: 20px; */
+    /* background-color: pink; */
+    padding: 0px 0px 0px 0px;
   }
 }

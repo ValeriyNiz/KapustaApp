@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { getIsLoading, getMessage } from 'redux/auth/auth-selector';
+import { setGoogleAuth } from 'redux/auth/authSlice';
 import Loader from 'shared/Loader/Loader';
 import ModalSimple from 'shared/ModalSimple/ModalSimple';
 import { ReactComponent as GoogleIcon } from '../../images/google.svg';
@@ -14,6 +16,7 @@ const AuthForm = () => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [shortLengthPassword, setShortLengthPassword] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
   const message = useSelector(getMessage);
@@ -37,6 +40,17 @@ const AuthForm = () => {
         return;
     }
   };
+
+  useEffect(() => {
+    const email = searchParams.get('email');
+    const token = searchParams.get('token');
+    const balance = searchParams.get('balance');
+
+    if (email && token && balance) {
+      dispatch(setGoogleAuth({ email, token, balance }));
+      setSearchParams('', { replace: true });
+    }
+  }, [searchParams, dispatch, setSearchParams]);
 
   const checkValidData = () => {
     if (email === '') {

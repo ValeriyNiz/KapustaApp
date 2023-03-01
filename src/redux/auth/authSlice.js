@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { authToken } from 'API';
 import {
   logIn,
   logOut,
   refresh,
-  googleAuth,
   setBalance,
   register,
 } from './auth-operations';
@@ -11,7 +11,7 @@ import {
 export const initialState = {
   user: {
     email: '',
-    balance: null,
+    balance: 'null',
   },
   isLoginApiDone: false,
   accessToken: null,
@@ -27,6 +27,15 @@ const authSlice = createSlice({
   reducers: {
     changeBalance(state, { payload }) {
       state.user.balance = payload;
+    },
+    setGoogleAuth(state, { payload }) {
+      const { email, token, balance } = payload;
+      authToken.set(token);
+      state.user = { email: email, balance: balance };
+      state.isLoginApiDone = true;
+      state.accessToken = token;
+      state.isLoading = false;
+      state.isLogin = true;
     },
   },
   extraReducers: {
@@ -62,14 +71,12 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.message = payload;
     },
-
     [logOut.fulfilled]: state => {
       state.user = { email: '', balance: null };
       state.accessToken = null;
       state.isLogin = false;
       state.message = '';
     },
-
     [refresh.pending]: state => {
       state.isRefreshing = true;
     },
@@ -83,16 +90,6 @@ const authSlice = createSlice({
       state.isLoginApiDone = true;
       state.isRefreshing = false;
     },
-
-    [googleAuth.fulfilled](state, action) {
-      const { user, accessToken, refreshToken, sid } = action.payload;
-      state.user = user;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
-      state.sid = sid;
-      state.isLogin = true;
-    },
-
     [setBalance.fulfilled]: (state, { payload: { newUserBalance } }) => {
       state.user.balance = newUserBalance;
     },
@@ -100,4 +97,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { changeBalance } = authSlice.actions;
+export const { changeBalance, setGoogleAuth } = authSlice.actions;

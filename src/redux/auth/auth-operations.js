@@ -54,19 +54,6 @@ const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   }
 });
 
-const googleAuth = createAsyncThunk(
-  'auth/googleAuth',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await API.post('/auth/google', credentials);
-      authToken.set(response.data.token);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 const setBalance = createAsyncThunk(
   'auth/setBalance',
   async (balance, { rejectWithValue }) => {
@@ -79,4 +66,4 @@ const setBalance = createAsyncThunk(
   }
 );
 
-export { register, logIn, logOut, refresh, googleAuth, setBalance };
+export { register, logIn, logOut, refresh, setBalance };

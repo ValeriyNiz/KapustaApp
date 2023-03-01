@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBalance } from 'redux/auth/auth-operations';
 import { getBalance } from 'redux/auth/auth-selector';
@@ -10,19 +10,22 @@ import css from './Balance.module.css';
 export default function Balance() {
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState('00.00');
   const balanceRedux = useSelector(getBalance);
+  const [inputValue, setInputValue] = useState('00.00');
   // console.log('balanceRedux', balanceRedux);
   // console.log('inputValue ', inputValue);
 
   const [isSent, setIsSent] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(true);
 
+  useEffect(() => {
+    setInputValue(balanceRedux);
+  }, [balanceRedux]);
+
   const handlerSubmit = async e => {
     e.preventDefault();
     await dispatch(setBalance({ balance: inputValue }));
     setIsSent(true);
-    setInputValue('00.00');
   };
 
   const onChange = e => {
@@ -41,7 +44,7 @@ export default function Balance() {
         <CurrencyInput
           type="text"
           name="balance"
-          value={balanceRedux ?? inputValue}
+          value={inputValue}
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />

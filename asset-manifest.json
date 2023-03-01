@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/KapustaApp/static/css/main.e4a72b9f.css",
-    "main.js": "/KapustaApp/static/js/main.59a0a541.js",
-    "static/media/currentPeriod.svg": "/KapustaApp/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
-    "static/media/kapusta.png": "/KapustaApp/static/media/kapusta.fc652d90e4ffce32f155.png",
-    "static/media/kapusta_main.png": "/KapustaApp/static/media/kapusta_main.6150a566c2556f581eaa.png",
-    "static/media/sprite.svg": "/KapustaApp/static/media/sprite.7188a90b1c3575b7295bed5dd987b504.svg",
-    "static/media/google.svg": "/KapustaApp/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
-    "index.html": "/KapustaApp/index.html",
-    "main.e4a72b9f.css.map": "/KapustaApp/static/css/main.e4a72b9f.css.map",
-    "main.59a0a541.js.map": "/KapustaApp/static/js/main.59a0a541.js.map"
+    "main.css": "/static/css/main.d73ca90e.css",
+    "main.js": "/static/js/main.adfb0c5c.js",
+    "static/media/currentPeriod.svg": "/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
+    "static/media/kapusta.png": "/static/media/kapusta.fc652d90e4ffce32f155.png",
+    "static/media/kapusta_main.png": "/static/media/kapusta_main.6150a566c2556f581eaa.png",
+    "static/media/sprite.svg": "/static/media/sprite.7188a90b1c3575b7295bed5dd987b504.svg",
+    "static/media/google.svg": "/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
+    "index.html": "/index.html",
+    "main.d73ca90e.css.map": "/static/css/main.d73ca90e.css.map",
+    "main.adfb0c5c.js.map": "/static/js/main.adfb0c5c.js.map"
   },
   "entrypoints": [
-    "static/css/main.e4a72b9f.css",
-    "static/js/main.59a0a541.js"
+    "static/css/main.d73ca90e.css",
+    "static/js/main.adfb0c5c.js"
   ]
 }

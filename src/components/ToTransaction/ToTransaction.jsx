@@ -12,7 +12,7 @@ export const ToTransaction = () => {
 
   return (
     <div className={css.linkFlex}>
-      <button onClick={goToExpensesPage}>
+      <button className={css.button} onClick={goToExpensesPage}>
         <svg width="14" height="9">
           <use href={`${Sprite}#back-arrow`}></use>
         </svg>

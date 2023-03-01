@@ -11,6 +11,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 300ms opacity;
+  z-index: 1000;
 }
 
 .modal__backdrop.active {

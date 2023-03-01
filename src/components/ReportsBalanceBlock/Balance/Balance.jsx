@@ -10,23 +10,19 @@ import css from './Balance.module.css';
 export default function Balance() {
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState('00.00');
   const balanceRedux = useSelector(getBalance);
-  console.log('balanceRedux', balanceRedux);
+  // console.log('balanceRedux', balanceRedux);
+  // console.log('inputValue ', inputValue);
 
   const [isSent, setIsSent] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(true);
-  console.log('inputValue ', inputValue);
-
-  // useEffect(() => {
-  //   setInputValue(balanceRedux);
-  // }, [balanceRedux]);
 
   const handlerSubmit = async e => {
     e.preventDefault();
     await dispatch(setBalance({ balance: inputValue }));
     setIsSent(true);
-    // setInputValue(0);
+    setInputValue('00.00');
   };
 
   const onChange = e => {
@@ -45,10 +41,11 @@ export default function Balance() {
         <CurrencyInput
           type="text"
           name="balance"
+          value={balanceRedux ?? inputValue}
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />
-        {!balanceRedux > 0 && inputValue === 0 && (
+        {balanceRedux === null && (
           <Tooltip active={isShowTooltip} setActive={setIsShowTooltip}>
             <p>
               Hello! To get started, enter the current balance of your account!

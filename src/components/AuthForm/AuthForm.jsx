@@ -41,25 +41,25 @@ const AuthForm = () => {
   const checkValidData = () => {
     if (email === '') {
       setEmptyInput(true);
-      return
+      return;
     }
 
     if (!email.includes('@')) {
       setInvalidEmail(true);
-      return
+      return;
     }
 
     if (password.length < 8) {
       setShortLengthPassword(true);
-      return
+      return;
     }
 
     return;
   };
 
-  const handleLogin = async(evt) => {
+  const handleLogin = async evt => {
     evt.preventDefault();
-    await checkValidData()
+    await checkValidData();
     const credentials = { email, password };
 
     if (emptyInput || invalidEmail || shortLengthPassword) {
@@ -71,7 +71,7 @@ const AuthForm = () => {
   };
 
   const handleRegister = async () => {
-    checkValidData()
+    checkValidData();
     const credentials = { email, password };
 
     if (emptyInput || invalidEmail || shortLengthPassword) {
@@ -94,7 +94,10 @@ const AuthForm = () => {
         <p className={css.formTextGoogle}>
           You can log in with your Google Account:
         </p>
-        <a href="https://google.com" className={css.googleBtn}>
+        <a
+          href="https://kapusta-dvde.onrender.com/api/auth/google"
+          className={css.googleBtn}
+        >
           <GoogleIcon className={css.googleSvg} />
           Google
         </a>
@@ -156,7 +159,7 @@ const AuthForm = () => {
             </p>
           </label>
           {isLoading ? (
-            <Loader height = '130'/>
+            <Loader height="130" />
           ) : (
             <div className={css.authBtn}>
               <button onClick={handleLogin} className={css.btn} type="submit">

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.db77d152.css",
-    "main.js": "/static/js/main.2797856b.js",
+    "main.js": "/static/js/main.b75be5a7.js",
     "static/media/currentPeriod.svg": "/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
     "static/media/kapusta.png": "/static/media/kapusta.fc652d90e4ffce32f155.png",
     "static/media/kapusta_main.png": "/static/media/kapusta_main.6150a566c2556f581eaa.png",
@@ -9,10 +9,10 @@
     "static/media/google.svg": "/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
     "index.html": "/index.html",
     "main.db77d152.css.map": "/static/css/main.db77d152.css.map",
-    "main.2797856b.js.map": "/static/js/main.2797856b.js.map"
+    "main.b75be5a7.js.map": "/static/js/main.b75be5a7.js.map"
   },
   "entrypoints": [
     "static/css/main.db77d152.css",
-    "static/js/main.2797856b.js"
+    "static/js/main.b75be5a7.js"
   ]
 }

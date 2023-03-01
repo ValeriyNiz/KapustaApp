@@ -12,8 +12,8 @@ export default function Balance() {
 
   const [inputValue, setInputValue] = useState('00.00');
   const balanceRedux = useSelector(getBalance);
-  console.log('balanceRedux', balanceRedux);
-  console.log('inputValue ', inputValue);
+  // console.log('balanceRedux', balanceRedux);
+  // console.log('inputValue ', inputValue);
 
   const [isSent, setIsSent] = useState(false);
   const [isShowTooltip, setIsShowTooltip] = useState(true);

@@ -90,6 +90,9 @@ button {
 .item:hover .icon {
   fill: #ff751d;
 }
+.icon_active{
+  fill:#ff751d;
+}
 .category {
   font-weight: 400;
   font-size: 12px;

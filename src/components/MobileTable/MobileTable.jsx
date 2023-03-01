@@ -41,7 +41,7 @@ export const MobileTable = () => {
   return (
     <>
       <DateComponent date={date} setDate={onDateChange} />
-      <ul className={css.TableList}>
+      <ul className={css.tableList}>
         {tableData.map(t => (
           <li key={t._id}>
             <div className={css.elementDiv}>

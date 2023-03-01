@@ -60,7 +60,9 @@
   color: #407946;
 }
 
-.TableList {
+.tableList {
+  height: calc(100vh - 450px);
+  margin-top: 20px;
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -69,8 +71,4 @@ ul,
 li {
   margin: 0;
   padding: 0;
-}
-
-ul {
-  height: calc(100vh - 450px);
 }

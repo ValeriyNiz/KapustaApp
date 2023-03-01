@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   getTotalReportObject,
   getSelectedCashflow,
@@ -7,7 +7,7 @@ import {
 } from 'redux/report/report-selectors';
 
 import css from './TabletDiagram.module.css';
-
+import { setSelectedCategory } from 'redux/report/report-slice';
 import {
   BarChart,
   LabelList,
@@ -20,11 +20,21 @@ import {
 } from 'recharts';
 
 export const TabletDiagram = () => {
+  const dispatch = useDispatch();
   const totalReportObject = useSelector(getTotalReportObject);
   const selectedCashflow = useSelector(getSelectedCashflow);
   const selectedCategory = useSelector(getSelectedCategory);
 
   const [descriptions, setDescriptions] = useState([]);
+  useEffect(() => {
+    if (totalReportObject) {
+      const data =
+        selectedCashflow === 'Expenses'
+          ? totalReportObject.expenses
+          : totalReportObject.income;
+      dispatch(setSelectedCategory(data.categories[0].category));
+    }
+  }, [dispatch, totalReportObject, selectedCashflow]);
 
   useEffect(() => {
     if (!totalReportObject) {

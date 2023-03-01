@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import clsx from 'clsx';
 
 import { fetchFullStatistics } from 'redux/report/report-operations';
 import {
@@ -10,8 +11,10 @@ import {
 } from 'redux/report/report-selectors';
 
 import {
+  setSearchedMonth,
   setSelectedCashflow,
   setSelectedCategory,
+  setSearchedYear,
 } from '../../redux/report/report-slice';
 
 import css from './Report.module.css';
@@ -35,11 +38,15 @@ const monthNames = [
 
 export const Report = () => {
   const dispatch = useDispatch();
+  const currentMonth = 'March';
+  const currentYear = 2023;
   const searchedYear = useSelector(getSearchedYear);
   const searchedMonth = useSelector(getSearchedMonth);
   const totalReportObject = useSelector(getTotalReportObject);
   const selectedCashflow = useSelector(getSelectedCashflow);
   const [categoriesArray, setCategoriesArray] = useState();
+  const [isActive,setIsActive]=useState()
+
   useEffect(() => {
     dispatch(
       fetchFullStatistics({
@@ -50,6 +57,11 @@ export const Report = () => {
   }, [searchedMonth, searchedYear, dispatch]);
 
   useEffect(() => {
+    dispatch(setSearchedMonth(currentMonth));
+    dispatch(setSearchedYear(currentYear));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (totalReportObject) {
       const { income, expenses } = totalReportObject;
       let incomCategoriesSorted = null;
@@ -57,12 +69,12 @@ export const Report = () => {
 
       if (income && income.categories) {
         incomCategoriesSorted = [...income.categories].sort(
-          (first, second) => first.sum - second.sum
+          (first, second) => second.sum - first.sum
         );
       }
       if (expenses && expenses.categories) {
         expensesCategoriesSorted = [...expenses.categories].sort(
-          (first, second) => first.sum - second.sum
+          (first, second) => second.sum - first.sum
         );
       }
 
@@ -71,8 +83,15 @@ export const Report = () => {
           ? expensesCategoriesSorted
           : incomCategoriesSorted
       );
+      
     }
   }, [selectedCashflow, totalReportObject]);
+  useEffect(()=>{
+    if(categoriesArray)
+    {
+      setIsActive(categoriesArray[0].category)
+    }
+  },[categoriesArray])
 
   const onCashflowChange = () => {
     dispatch(
@@ -84,6 +103,7 @@ export const Report = () => {
 
   const onCategoryChange = category => {
     dispatch(setSelectedCategory(category));
+    setIsActive(category)
   };
 
   return (
@@ -115,7 +135,7 @@ export const Report = () => {
                 >
                   <p className={css.sum}>{category.sum}</p>
                   <div className={css.backGround}>
-                    <svg className={css.icon} width={55} height={56}>
+                    <svg className={clsx(css.icon,category.category===isActive && css.icon_active)} width={55} height={56}>
                       <use href={chooseIcon(category.category)}></use>
                     </svg>
                   </div>

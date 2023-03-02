@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   getTotalReportObject,
   getSelectedCashflow,
@@ -17,28 +17,15 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
-import { setSelectedCategory } from 'redux/report/report-slice';
 
 export const MobileDiagram = () => {
-  const dispatch = useDispatch();
-
   const totalReportObject = useSelector(getTotalReportObject);
   const selectedCashflow = useSelector(getSelectedCashflow);
   const selectedCategory = useSelector(getSelectedCategory);
 
   const [descriptions, setDescriptions] = useState([]);
 
-  useEffect(() => {
-    if (totalReportObject) {
-      const data =
-        selectedCashflow === 'Expenses'
-          ? totalReportObject.expenses
-          : totalReportObject.income;
-      if (data.categories) {
-        dispatch(setSelectedCategory(data.categories[0].category));
-      }
-    }
-  }, [dispatch, totalReportObject, selectedCashflow]);
+ 
   useEffect(() => {
     if (!totalReportObject) {
       setDescriptions([]);

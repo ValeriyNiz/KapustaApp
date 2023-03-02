@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { getIsLoading, getMessage } from 'redux/auth/auth-selector';
@@ -22,6 +23,45 @@ const AuthForm = () => {
   const message = useSelector(getMessage);
   const isLoading = useSelector(getIsLoading);
 
+  useEffect(() => {
+    const email = searchParams.get('email');
+    const token = searchParams.get('token');
+    const balance = searchParams.get('balance');
+
+    if (email && token && balance) {
+      dispatch(setGoogleAuth({ email, token, balance }));
+      setSearchParams('', { replace: true });
+    }
+  }, [searchParams, dispatch, setSearchParams]);
+
+    const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email('Email must be a valid')
+      .required('Please fill in the email'),
+
+    password: yup
+      .string()
+      .trim('The password cannot include leading and trailing spaces')
+      .strict(true)
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .required('Please fill in the password'),
+  });
+
+  const checkValidData = () => {
+    if (email === '') {
+      setEmptyInput(true);
+    }
+
+    if (!email.includes('@')) {
+      setInvalidEmail(true);
+    }
+
+    if (password.length < 8) {
+      setShortLengthPassword(true);
+    }
+  };
+
   const handleChange = evt => {
     setEmptyInput(false);
     setShortLengthPassword(false);
@@ -41,62 +81,33 @@ const AuthForm = () => {
     }
   };
 
-  useEffect(() => {
-    const email = searchParams.get('email');
-    const token = searchParams.get('token');
-    const balance = searchParams.get('balance');
-
-    if (email && token && balance) {
-      dispatch(setGoogleAuth({ email, token, balance }));
-      setSearchParams('', { replace: true });
-    }
-  }, [searchParams, dispatch, setSearchParams]);
-
-  const checkValidData = () => {
-    if (email === '') {
-      setEmptyInput(true);
-      return;
-    }
-
-    if (!email.includes('@')) {
-      setInvalidEmail(true);
-      return;
-    }
-
-    if (password.length < 8) {
-      setShortLengthPassword(true);
-      return;
-    }
-
-    return;
-  };
-
+  const fieldsValidation = async (credentials) => {
+    const yupValid = await validationSchema.isValid(credentials);
+    
+    return yupValid
+  }
+  
   const handleLogin = async evt => {
     evt.preventDefault();
-    await checkValidData();
-    const credentials = { email, password };
+    checkValidData()
+    const isValid = await fieldsValidation({ email, password })
 
-    if (emptyInput || invalidEmail || shortLengthPassword) {
-      return;
+    if (!isValid) {
+      return
     }
-    await dispatch(logIn(credentials));
-    setIsModalActive(true);
-    resetForm();
-  };
+      await dispatch(logIn({ email, password }));
+      setIsModalActive(true);
+  }
 
   const handleRegister = async () => {
     checkValidData();
-    const credentials = { email, password };
+    const isValid = await fieldsValidation({ email, password })
 
-    if (emptyInput || invalidEmail || shortLengthPassword) {
-      return;
+    if (!isValid) {
+      return
     }
-    await dispatch(register(credentials));
+    await dispatch(register({ email, password }));
     setIsModalActive(true);
-  };
-
-  const resetForm = () => {
-    setPassword('');
   };
 
   return (
@@ -146,7 +157,7 @@ const AuthForm = () => {
             </p>
           </label>
           <label className={css.formLabel}>
-            {emptyInput ? (
+            {shortLengthPassword ? (
               <>
                 <span>
                   <span className={css.spanLabel}>*</span>

@@ -9,9 +9,9 @@ import css from './Balance.module.css';
 
 export default function Balance() {
   const dispatch = useDispatch();
-
   const balanceRedux = useSelector(getBalance);
-  const [inputValue, setInputValue] = useState('00.00');
+
+  const [inputValue, setInputValue] = useState(balanceRedux ?? '00.00');
   // console.log('balanceRedux', balanceRedux);
   // console.log('inputValue ', inputValue);
 
@@ -48,7 +48,7 @@ export default function Balance() {
           onChange={onChange}
           placeholder={balanceRedux ? `${balanceRedux} UAH` : '00.00 UAH'}
         />
-        {balanceRedux === null && (
+        {(inputValue === '00.00' || !inputValue) && (
           <Tooltip active={isShowTooltip} setActive={setIsShowTooltip}>
             <p>
               Hello! To get started, enter the current balance of your account!
@@ -61,7 +61,7 @@ export default function Balance() {
         <button
           className={css.balance__button}
           type="submit"
-          disabled={!inputValue || isSent}
+          disabled={inputValue === '00.00' || !inputValue || isSent}
         >
           CONFIRM
         </button>

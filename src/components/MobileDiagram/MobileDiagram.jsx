@@ -25,6 +25,7 @@ export const MobileDiagram = () => {
 
   const [descriptions, setDescriptions] = useState([]);
 
+ 
   useEffect(() => {
     if (!totalReportObject) {
       setDescriptions([]);

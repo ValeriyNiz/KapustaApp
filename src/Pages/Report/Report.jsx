@@ -45,7 +45,7 @@ export const Report = () => {
   const totalReportObject = useSelector(getTotalReportObject);
   const selectedCashflow = useSelector(getSelectedCashflow);
   const [categoriesArray, setCategoriesArray] = useState();
-  const [isActive,setIsActive]=useState()
+  const [isActive, setIsActive] = useState();
 
   useEffect(() => {
     dispatch(
@@ -83,15 +83,15 @@ export const Report = () => {
           ? expensesCategoriesSorted
           : incomCategoriesSorted
       );
-      
     }
   }, [selectedCashflow, totalReportObject]);
-  useEffect(()=>{
-    if(categoriesArray)
-    {
-      setIsActive(categoriesArray[0].category)
+
+  useEffect(() => {
+    if (categoriesArray) {
+      dispatch(setSelectedCategory(categoriesArray[0].category));
+      setIsActive(categoriesArray[0].category);
     }
-  },[categoriesArray])
+  }, [dispatch, categoriesArray]);
 
   const onCashflowChange = () => {
     dispatch(
@@ -103,7 +103,7 @@ export const Report = () => {
 
   const onCategoryChange = category => {
     dispatch(setSelectedCategory(category));
-    setIsActive(category)
+    setIsActive(category);
   };
 
   return (
@@ -135,7 +135,14 @@ export const Report = () => {
                 >
                   <p className={css.sum}>{category.sum}</p>
                   <div className={css.backGround}>
-                    <svg className={clsx(css.icon,category.category===isActive && css.icon_active)} width={55} height={56}>
+                    <svg
+                      className={clsx(
+                        css.icon,
+                        category.category === isActive && css.icon_active
+                      )}
+                      width={55}
+                      height={56}
+                    >
                       <use href={chooseIcon(category.category)}></use>
                     </svg>
                   </div>

@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.db77d152.css",
-    "main.js": "/static/js/main.76427bf1.js",
+    "main.css": "/static/css/main.a555ab95.css",
+    "main.js": "/static/js/main.256029af.js",
     "static/media/currentPeriod.svg": "/static/media/currentPeriod.dd330c1f2ae8cc97cd1368f012ffd8a3.svg",
     "static/media/kapusta.png": "/static/media/kapusta.fc652d90e4ffce32f155.png",
     "static/media/kapusta_main.png": "/static/media/kapusta_main.6150a566c2556f581eaa.png",
     "static/media/sprite.svg": "/static/media/sprite.7188a90b1c3575b7295bed5dd987b504.svg",
     "static/media/google.svg": "/static/media/google.5bffa622c324b2895f528fbeb5ea8966.svg",
     "index.html": "/index.html",
-    "main.db77d152.css.map": "/static/css/main.db77d152.css.map",
-    "main.76427bf1.js.map": "/static/js/main.76427bf1.js.map"
+    "main.a555ab95.css.map": "/static/css/main.a555ab95.css.map",
+    "main.256029af.js.map": "/static/js/main.256029af.js.map"
   },
   "entrypoints": [
-    "static/css/main.db77d152.css",
-    "static/js/main.76427bf1.js"
+    "static/css/main.a555ab95.css",
+    "static/js/main.256029af.js"
   ]
 }

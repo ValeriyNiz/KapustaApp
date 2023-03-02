@@ -1,10 +1,14 @@
 .datebutton {
-  width: 100%;
+  margin: 0 auto;
+  width: 110px;
   /* background-color: red; */
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: #52555f;
+
   font-family: 'Roboto';
   font-weight: 900;
   font-size: 12px;

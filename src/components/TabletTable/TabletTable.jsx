@@ -36,6 +36,7 @@ export const TabletTable = () => {
             <th>Description</th>
             <th>Category</th>
             <th>Sum</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -45,7 +46,7 @@ export const TabletTable = () => {
               <td>{t.description}</td>
               <td>{t.category}</td>
               <td>
-                <div className={css.deleteDiv}>
+                <div>
                   {!isIncome ? (
                     <span className={css.value}>- {t.sum} UAH</span>
                   ) : (
@@ -53,12 +54,14 @@ export const TabletTable = () => {
                       {t.sum} UAH
                     </span>
                   )}
-                  <button onClick={() => handleDelete(t._id, t.sum, t.income)}>
-                    <svg width="18" height="18" className={css.bin}>
-                      <use href={`${Sprite}#bin`}></use>
-                    </svg>
-                  </button>
                 </div>
+              </td>
+              <td>
+                <button onClick={() => handleDelete(t._id, t.sum, t.income)}>
+                  <svg width="18" height="18" className={css.bin}>
+                    <use href={`${Sprite}#bin`}></use>
+                  </svg>
+                </button>
               </td>
             </tr>
           ))}
